@@ -1,0 +1,48 @@
+.container {
+  padding: 0 100px;
+  background-color: black;
+  color: white;
+}
+
+.title {
+  font-family: 'Lato', sans-serif;
+  font-size: 2rem;
+}
+
+.description {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem; /* Fuente ajustada para todas las páginas */
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.button {
+  font-family: 'Lato', sans-serif;
+  color: lightblue;
+  margin-right: 25px;
+}
+
+.videoGallery, .imageGallery {
+  margin-top: 20px;
+}
+
+.videoItem, .imageItem {
+  margin-bottom: 20px;
+}
+
+.videoTitle, .imageTitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  color: lightgray;
+}
+
+.socialIcons {
+  margin-top: 20px;
+}
+
+.icon {
+  width: 25px;
+  margin-right: 15px;
+}

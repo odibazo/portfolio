@@ -1,0 +1,56 @@
+/* styles/globals.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+p {
+  font-size: 1.25em;
+  line-height: 1.6;
+}
+
+a {
+  color: #00BFFF; /* Azul claro para los enlaces */
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 100px;
+  background-color: black;
+}
+
+.buttons {
+  display: flex;
+  gap: 25px;
+}
+
+.button {
+  color: #00BFFF; /* Azul claro */
+  font-weight: bold;
+}
+
+.socialIcons {
+  margin-top: 20px;
+}
+
+.icon {
+  margin-right: 15px;
+  width: 30px;
+  height: auto;
+}
+
+.icon:last-child {
+  margin-right: 0;
+}

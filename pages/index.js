@@ -47,7 +47,12 @@ export default function Home() {
               View selected work
               <span aria-hidden="true">↗</span>
             </Link>
-            <a href="mailto:odibazo@gmail.com" className={styles.secondaryButton}>
+            <a
+              href="https://www.linkedin.com/in/odibazo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.secondaryButton}
+            >
               Contact me
             </a>
           </div>

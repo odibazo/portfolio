@@ -70,15 +70,23 @@ export default function Home() {
         </header>
 
         <section className={styles.hero} aria-labelledby="hero-title">
-          <p className={styles.eyebrow}><span className={styles.statusDot} aria-hidden="true" />Barcelona · Available for selected projects</p>
-          <h1 id="hero-title" className={styles.title}>Visual, UX/UI &amp;<span> e-learning designer.</span></h1>
-          <p className={styles.description}>I design clear digital experiences, visual identities and interactive learning content.</p>
-          <div className={styles.actions}>
-            <a href="#work" className={styles.primaryButton}>View selected work <span aria-hidden="true">↓</span></a>
-            <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Contact me</a>
+          <div className={styles.heroMedia} aria-hidden="true">
+            <video autoPlay muted loop playsInline preload="metadata" poster="/images/sea-hero-poster.webp">
+              <source src="/videos/sea-hero-loop.webm" type="video/webm" />
+              <source src="/videos/sea-hero-loop.mp4" type="video/mp4" />
+            </video>
           </div>
-          <div className={styles.disciplines} aria-label="Design disciplines">
-            <span>E-learning</span><span>UX/UI</span><span>Graphic Design</span><span>Video</span>
+          <div className={styles.heroContent}>
+            <p className={styles.eyebrow}><span className={styles.statusDot} aria-hidden="true" />Barcelona · Available for selected projects</p>
+            <h1 id="hero-title" className={styles.title}>Visual, UX/UI &amp;<span> e-learning designer.</span></h1>
+            <p className={styles.description}>I design clear digital experiences, visual identities and interactive learning content.</p>
+            <div className={styles.actions}>
+              <a href="#work" className={styles.primaryButton}>View selected work <span aria-hidden="true">↓</span></a>
+              <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Contact me</a>
+            </div>
+            <div className={styles.disciplines} aria-label="Design disciplines">
+              <span>E-learning</span><span>UX/UI</span><span>Graphic Design</span><span>Video</span>
+            </div>
           </div>
         </section>
 

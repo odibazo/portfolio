@@ -6,7 +6,11 @@
 .nav a::after,.footer a::after{content:'';position:absolute;left:0;bottom:-6px;width:100%;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform 220ms ease}
 .nav a:hover,.footer a:hover{color:var(--text)}
 .nav a:hover::after,.footer a:hover::after{transform:scaleX(1);transform-origin:left}
-.hero{width:min(1120px,100%);min-height:calc(100svh - 88px);padding:clamp(72px,9vw,132px) 0;display:flex;flex-direction:column;justify-content:center}
+.hero{position:relative;isolation:isolate;width:100%;min-height:calc(100svh - 88px);padding:clamp(72px,9vw,132px) 0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.heroMedia{position:absolute;inset:0;z-index:-2;background:#0b0b0c url('/images/sea-hero-poster.webp') center/cover no-repeat;pointer-events:none}
+.heroMedia::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,12,.86) 0%,rgba(11,11,12,.62) 54%,rgba(11,11,12,.46) 100%),linear-gradient(180deg,rgba(11,11,12,.5) 0%,rgba(11,11,12,.34) 52%,#0b0b0c 100%)}
+.heroMedia video{width:100%;height:100%;object-fit:cover;opacity:.72}
+.heroContent{position:relative;z-index:1;width:min(1120px,100%)}
 .eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 32px;color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;animation:fadeUp 700ms both}
 .statusDot{width:8px;height:8px;flex:0 0 auto;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(200,255,101,.45);animation:pulse 2.8s infinite}
 .title{max-width:1040px;margin:0;font-size:clamp(3.35rem,8.6vw,8.2rem);line-height:.9;letter-spacing:-.075em;font-weight:500;text-wrap:balance;animation:fadeUp 760ms 80ms both}
@@ -58,7 +62,7 @@
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,255,101,0)}45%{box-shadow:0 0 0 8px rgba(200,255,101,.12)}}
 @media(max-width:760px){
 .container{padding:0 20px}.header{min-height:74px}.nav{gap:16px}.nav a{font-size:.8rem}
-.hero{min-height:calc(100svh - 74px);padding:70px 0 86px}.eyebrow{align-items:flex-start;line-height:1.5}.statusDot{margin-top:3px}.title{font-size:clamp(3.1rem,15.5vw,4.8rem)}
+.hero{min-height:calc(100svh - 74px);padding:70px 0 86px}.heroMedia video{display:none}.heroMedia::after{background:linear-gradient(180deg,rgba(11,11,12,.64),#0b0b0c 100%)}.eyebrow{align-items:flex-start;line-height:1.5}.statusDot{margin-top:3px}.title{font-size:clamp(3.1rem,15.5vw,4.8rem)}
 .actions{flex-direction:column}.primaryButton,.secondaryButton{width:100%;box-sizing:border-box}
 .sectionHeader{grid-template-columns:1fr;gap:22px}.projectGrid,.videoGrid,.aboutGrid{grid-template-columns:1fr}.projectGrid{gap:46px}.projectCard:nth-child(even){margin-top:0}
 .projectMeta{align-items:flex-start;flex-direction:column;gap:7px}.projectMeta p{text-align:left}.videoGrid{gap:42px}.aboutGrid{gap:64px}.contactSection h2{font-size:clamp(3.4rem,17vw,5.6rem)}
@@ -66,5 +70,6 @@
 }
 @media(prefers-reduced-motion:reduce){
 .eyebrow,.title,.description,.actions,.disciplines,.statusDot{animation:none}
+.heroMedia video{display:none}
 .projectImage img,.primaryButton,.secondaryButton,.contactLinks a,.nav a::after,.footer a::after{transition:none}
 }

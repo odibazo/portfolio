@@ -11,7 +11,7 @@ const projects = [
   { title: 'Meraki Therapy', category: 'Web design', image: '/images/webmerakytherapy.webp' },
   { title: 'CyclingBCN', category: 'Digital design', image: '/images/webcyclingbcn.webp' },
   { title: 'Astrogestalt', category: 'Web design', image: '/images/webastrogestalt.webp' },
-  { title: 'Bouncing Shield', category: 'Web experience', image: '/images/Desktop-HD-BOUNCING.png' },
+  { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.png' },
 ];
 
 const videos = [

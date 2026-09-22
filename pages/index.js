@@ -71,9 +71,9 @@ export default function Home() {
 
         <section className={styles.hero} aria-labelledby="hero-title">
           <div className={styles.heroMedia} aria-hidden="true">
-            <video autoPlay muted loop playsInline preload="metadata" poster="/images/sea-hero-poster.webp">
-              <source src="/videos/sea-hero-loop.webm" type="video/webm" />
-              <source src="/videos/sea-hero-loop.mp4" type="video/mp4" />
+            <video autoPlay muted loop playsInline preload="auto" poster="/images/sea-hero-poster.webp">
+              <source src="/videos/sea-hero-loop.webm?v=2" type="video/webm" />
+              <source src="/videos/sea-hero-loop.mp4?v=2" type="video/mp4" />
             </video>
           </div>
           <div className={styles.heroContent}>

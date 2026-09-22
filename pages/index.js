@@ -11,7 +11,7 @@ const projects = [
   { title: 'Meraki Therapy', category: 'Web design', image: '/images/webmerakytherapy.webp' },
   { title: 'CyclingBCN', category: 'Digital design', image: '/images/webcyclingbcn.webp' },
   { title: 'Astrogestalt', category: 'Web design', image: '/images/webastrogestalt.webp' },
-  { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.webp' },
+  { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.webp', unoptimized: true },
 ];
 
 const videos = [
@@ -100,7 +100,7 @@ export default function Home() {
                 aria-label={project.href ? `${project.title}, open project` : undefined}
               >
                 <div className={styles.projectImage}>
-                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 760px) 100vw, 50vw" />
+                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized={project.unoptimized} />
                   <div className={styles.projectOverlay}>
                     <span>{project.href ? '↗' : String(index + 1).padStart(2, '0')}</span>
                   </div>

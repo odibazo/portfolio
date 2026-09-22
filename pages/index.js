@@ -3,8 +3,9 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 const projects = [
-  { title: 'PER Cards', category: 'Product & game design', image: '/images/PER-CARDS-2020ODIBAZO-9-1.webp' },
-  { title: 'Foxize Cloud', category: 'UX/UI & e-learning', image: '/images/foxizecloud2020-1.webp' },
+  { title: 'Foxize Cloud', category: 'Web design & digital product', image: '/images/foxizecloud-current.jpg', href: 'https://www.foxizecloud.com/' },
+  { title: 'Foxize', category: 'Corporate website & digital design', image: '/images/foxize-current.jpg', href: 'https://www.foxize.com/' },
+  { title: 'PER Cards', category: 'Product & game design', image: '/images/PER-CARDS-2020ODIBAZO-9-1.webp', href: 'https://www.behance.net/gallery/107191195/La-baraja-de-cartas-para-PER' },
   { title: 'Today I’m', category: 'Mobile app design', image: '/images/TODAYIM_PRESENTACION01-01-low.png' },
   { title: 'BcnByBike', category: 'Mobile experience', image: '/images/webBCNBYBIKE-artboard1.webp' },
   { title: 'Meraki Therapy', category: 'Web design', image: '/images/webmerakytherapy.webp' },
@@ -82,15 +83,26 @@ export default function Home() {
             <div><p className={styles.kicker}>Selected work</p><h2>Projects shaped around clarity, learning and visual impact.</h2></div>
           </div>
           <div className={styles.projectGrid}>
-            {projects.map((project, index) => (
-              <article key={project.title} className={styles.projectCard}>
+            {projects.map((project, index) => {
+              const CardTag = project.href ? 'a' : 'article';
+              return (
+              <CardTag
+                key={project.title}
+                className={styles.projectCard}
+                href={project.href}
+                target={project.href ? '_blank' : undefined}
+                rel={project.href ? 'noopener noreferrer' : undefined}
+                aria-label={project.href ? `${project.title}, open project` : undefined}
+              >
                 <div className={styles.projectImage}>
                   <Image src={project.image} alt={project.title} fill sizes="(max-width: 760px) 100vw, 50vw" />
-                  <div className={styles.projectOverlay}><span>{String(index + 1).padStart(2, '0')}</span></div>
+                  <div className={styles.projectOverlay}>
+                    <span>{project.href ? '↗' : String(index + 1).padStart(2, '0')}</span>
+                  </div>
                 </div>
                 <div className={styles.projectMeta}><h3>{project.title}</h3><p>{project.category}</p></div>
-              </article>
-            ))}
+              </CardTag>
+            )})}
           </div>
           <a href="https://www.behance.net/ODIBAZO" target="_blank" rel="noopener noreferrer" className={styles.textLink}>
             Explore more projects on Behance <span aria-hidden="true">↗</span>

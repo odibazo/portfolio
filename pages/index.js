@@ -70,12 +70,6 @@ export default function Home() {
         </header>
 
         <section className={styles.hero} aria-labelledby="hero-title">
-          <div className={styles.heroMedia} aria-hidden="true">
-            <video autoPlay muted loop playsInline preload="auto" poster="/images/sea-hero-poster.webp">
-              <source src="/videos/sea-hero-loop.webm?v=2" type="video/webm" />
-              <source src="/videos/sea-hero-loop.mp4?v=2" type="video/mp4" />
-            </video>
-          </div>
           <div className={styles.heroContent}>
             <p className={styles.eyebrow}><span className={styles.statusDot} aria-hidden="true" />Barcelona · Available for selected projects</p>
             <h1 id="hero-title" className={styles.title}>Visual, UX/UI &amp;<span> e-learning designer.</span></h1>

@@ -11,7 +11,7 @@ const projects = [
   { title: 'Meraki Therapy', category: 'Web design', image: '/images/webmerakytherapy.webp' },
   { title: 'CyclingBCN', category: 'Digital design', image: '/images/webcyclingbcn.webp' },
   { title: 'Astrogestalt', category: 'Web design', image: '/images/webastrogestalt.webp' },
-  { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.png' },
+  { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.webp' },
 ];
 
 const videos = [
@@ -28,7 +28,12 @@ const structuredData = {
   url: 'https://www.odibazo.com/',
   jobTitle: 'Visual, UX/UI and e-learning designer',
   homeLocation: { '@type': 'Place', name: 'Barcelona, Spain' },
-  sameAs: ['https://www.linkedin.com/in/odibazo', 'https://www.behance.net/ODIBAZO'],
+  sameAs: [
+    'https://www.linkedin.com/in/odibazo',
+    'https://www.behance.net/ODIBAZO',
+    'https://www.instagram.com/odditybazo/',
+    'https://www.tiktok.com/@odibazo',
+  ],
   knowsAbout: ['Visual design', 'UX/UI design', 'E-learning', 'Instructional design', 'Video editing'],
 };
 
@@ -155,6 +160,8 @@ export default function Home() {
           <div className={styles.contactLinks}>
             <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
             <a href="https://www.behance.net/ODIBAZO" target="_blank" rel="noopener noreferrer">Behance <span aria-hidden="true">↗</span></a>
+            <a href="https://www.instagram.com/odditybazo/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+            <a href="https://www.tiktok.com/@odibazo" target="_blank" rel="noopener noreferrer">TikTok <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 

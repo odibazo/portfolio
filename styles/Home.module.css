@@ -1,6 +1,6 @@
 .container{--background:#0b0b0c;--surface:#171719;--text:#f4f1ea;--muted:#aaa8a3;--accent:#c8ff65;position:relative;min-height:100svh;padding:0 clamp(24px,6vw,96px);background:var(--background);color:var(--text);overflow:hidden}
 .container::before{content:'';position:absolute;inset:0 0 auto;height:100svh;background:linear-gradient(90deg,rgba(11,11,12,.82) 0%,rgba(11,11,12,.58) 55%,rgba(11,11,12,.42) 100%),linear-gradient(180deg,rgba(11,11,12,.28) 0%,rgba(11,11,12,.3) 58%,var(--background) 100%),url('/images/sea-hero-poster.webp') center/cover no-repeat;pointer-events:none}
-.header{position:sticky;top:0;z-index:20;min-height:88px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(244,241,234,.14);background:transparent}
+.header{position:sticky;top:0;z-index:20;min-height:88px;display:flex;justify-content:space-between;align-items:center;background:transparent}
 .brand{color:var(--text);font-size:1rem;font-weight:700;letter-spacing:-.02em}
 .nav{display:flex;gap:clamp(18px,3vw,40px)}
 .nav a,.footer a{position:relative;color:var(--muted);font-size:.92rem;transition:color 180ms ease}
@@ -22,7 +22,7 @@
 .secondaryButton:hover{border-color:var(--text);background:var(--text);color:#111}
 .disciplines{display:flex;flex-wrap:wrap;gap:10px;margin-top:54px;animation:fadeUp 760ms 320ms both}
 .disciplines span{padding:8px 12px;border:1px solid rgba(244,241,234,.14);border-radius:999px;color:var(--muted);font-size:.75rem;letter-spacing:.04em}
-.section{padding:clamp(100px,14vw,190px) 0;border-top:1px solid rgba(244,241,234,.14)}
+.section{padding:clamp(100px,14vw,190px) 0}
 .sectionHeader{display:grid;grid-template-columns:minmax(48px,.25fr) minmax(0,1.75fr);gap:24px;margin-bottom:clamp(54px,8vw,96px)}
 .sectionNumber,.kicker{margin:0;color:var(--accent);font-size:.76rem;line-height:1.4;letter-spacing:.1em;text-transform:uppercase}
 .sectionHeader h2{max-width:900px;margin:14px 0 0;font-size:clamp(2.4rem,6vw,5.6rem);line-height:.98;letter-spacing:-.055em;font-weight:500;text-wrap:balance}
@@ -48,13 +48,13 @@
 .aboutCopy .personalNote{color:var(--muted)}
 .capabilities{padding-top:8px}
 .capabilities ul{margin:28px 0 0;padding:0;list-style:none}
-.capabilities li{padding:17px 0;border-bottom:1px solid rgba(244,241,234,.14);color:var(--muted);font-size:.95rem}
-.contactSection{padding:clamp(100px,15vw,210px) 0;border-top:1px solid rgba(244,241,234,.14)}
+.capabilities li{padding:17px 0;color:var(--muted);font-size:.95rem}
+.contactSection{padding:clamp(100px,15vw,210px) 0}
 .contactSection h2{max-width:1050px;margin:20px 0 56px;font-size:clamp(3.4rem,9vw,8.6rem);line-height:.92;letter-spacing:-.07em;font-weight:500}
 .contactLinks{display:flex;flex-wrap:wrap;gap:14px}
 .contactLinks a{min-height:50px;padding:0 20px;display:inline-flex;align-items:center;gap:18px;border:1px solid rgba(244,241,234,.22);border-radius:999px;color:var(--text);transition:background-color 180ms ease,color 180ms ease,transform 180ms ease}
 .contactLinks a:hover{background:var(--text);color:#111;transform:translateY(-3px)}
-.footer{min-height:76px;border-top:1px solid rgba(244,241,234,.14);display:flex;justify-content:space-between;align-items:center;gap:24px;color:var(--muted);font-size:.78rem}
+.footer{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:24px;color:var(--muted);font-size:.78rem}
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,255,101,0)}45%{box-shadow:0 0 0 8px rgba(200,255,101,.12)}}
 @media(max-width:760px){

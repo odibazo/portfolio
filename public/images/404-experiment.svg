@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 960">
+  <defs>
+    <radialGradient id="g"><stop stop-color="#26302a"/><stop offset="1" stop-color="#0b0b0c"/></radialGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="2.2" fill="#c8ff65" opacity=".55"/></pattern>
+    <linearGradient id="f" x1="0" x2="1"><stop stop-color="#c8ff65"/><stop offset="1" stop-color="#f4f1ea"/></linearGradient>
+  </defs>
+  <rect width="1280" height="960" fill="#0b0b0c"/>
+  <rect width="1280" height="960" fill="url(#g)"/>
+  <rect width="1280" height="960" fill="url(#dots)"/>
+  <path d="M-130 270C240 90 405 605 740 370s520-160 710 140" fill="none" stroke="#c8ff65" opacity=".12" stroke-width="150"/>
+  <path d="M-80 710C290 500 445 790 780 610s540-130 680 60" fill="none" stroke="#f4f1ea" opacity=".1" stroke-width="90"/>
+  <g fill="none" stroke="url(#f)" stroke-width="7" opacity=".6">
+    <circle cx="1010" cy="220" r="110"/><circle cx="1010" cy="220" r="135"/><circle cx="1010" cy="220" r="161"/>
+  </g>
+  <text x="80" y="132" font-family="Arial,Helvetica,sans-serif" font-size="31" fill="#c8ff65" letter-spacing="7">INTERACTIVE EXPERIMENT — 009</text>
+  <text x="72" y="660" font-family="Arial,Helvetica,sans-serif" font-size="355" font-weight="900" letter-spacing="-30" fill="#f4f1ea">404</text>
+  <text x="82" y="787" font-family="Arial,Helvetica,sans-serif" font-size="52" font-weight="700" fill="#c8ff65">NOT FOUND. PLAY ANYWAY.</text>
+  <text x="84" y="857" font-family="Arial,Helvetica,sans-serif" font-size="27" fill="#b4b7b1" letter-spacing="3">CLICK • SCATTER • REPEAT</text>
+</svg>

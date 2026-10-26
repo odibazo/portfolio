@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import CursorTrail from '../components/CursorTrail';
 
 const projects = [
   { title: 'Foxize Cloud', category: 'Web design & digital product', image: '/images/foxizecloud-current.jpg', href: 'https://www.foxizecloud.com/' },
@@ -12,6 +13,7 @@ const projects = [
   { title: 'CyclingBCN', category: 'Digital design', image: '/images/webcyclingbcn.webp' },
   { title: 'Astrogestalt', category: 'Web design', image: '/images/webastrogestalt.webp' },
   { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.webp', unoptimized: true },
+  { title: '404 Playground', category: 'Interactive experiment · Creative coding', image: '/images/404-experiment.svg', href: '/play-404', unoptimized: true },
 ];
 
 const videos = [
@@ -60,6 +62,7 @@ export default function Home() {
       </Head>
 
       <main id="top" className={styles.container}>
+        <CursorTrail />
         <header className={styles.header}>
           <a href="#top" className={styles.brand} aria-label="Odi Bazó, back to top">Odi Bazó</a>
           <nav className={styles.nav} aria-label="Main navigation">
@@ -97,8 +100,8 @@ export default function Home() {
                 key={project.title}
                 className={styles.projectCard}
                 href={project.href}
-                target={project.href ? '_blank' : undefined}
-                rel={project.href ? 'noopener noreferrer' : undefined}
+                target={project.href && project.href.startsWith('http') ? '_blank' : undefined}
+                rel={project.href && project.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={project.href ? `${project.title}, open project` : undefined}
               >
                 <div className={styles.projectImage}>

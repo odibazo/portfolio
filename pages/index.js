@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import TidalField from '../components/TidalField';
 import styles from '../styles/Home.module.css';
 
 const projects = [
@@ -26,7 +27,7 @@ const structuredData = {
   '@type': 'Person',
   name: 'Odi Bazó',
   url: 'https://www.odibazo.com/',
-  jobTitle: 'Visual, UX/UI and e-learning designer',
+  jobTitle: 'Visual designer, e-learning & AI video creator',
   homeLocation: { '@type': 'Place', name: 'Barcelona, Spain' },
   sameAs: [
     'https://www.linkedin.com/in/odibazo',
@@ -41,19 +42,19 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Odi Bazó — Visual, UX/UI & E-learning Designer</title>
+        <title>Odi Bazó — Visual Design, E-learning & AI Video</title>
         <meta name="description" content="Selected work by Odi Bazó, a visual, UX/UI and e-learning designer based in Barcelona." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.odibazo.com/" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Odi Bazó — Visual, UX/UI & E-learning Designer" />
+        <meta property="og:title" content="Odi Bazó — Visual Design, E-learning & AI Video" />
         <meta property="og:description" content="Digital experiences, visual identities and interactive learning content." />
         <meta property="og:url" content="https://www.odibazo.com/" />
         <meta property="og:image" content="https://www.odibazo.com/images/PER-CARDS-2020ODIBAZO-9-1.webp" />
         <meta property="og:locale" content="en_GB" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Odi Bazó — Visual, UX/UI & E-learning Designer" />
+        <meta name="twitter:title" content="Odi Bazó — Visual Design, E-learning & AI Video" />
         <meta name="twitter:description" content="Digital experiences, visual identities and interactive learning content." />
         <meta name="twitter:image" content="https://www.odibazo.com/images/PER-CARDS-2020ODIBAZO-9-1.webp" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
@@ -70,16 +71,18 @@ export default function Home() {
         </header>
 
         <section className={styles.hero} aria-labelledby="hero-title">
+          <TidalField />
+          <div className={styles.heroIndex} aria-hidden="true"><span>INDEPENDENT DESIGN PRACTICE</span><span>41°23′ N / 02°10′ E</span></div>
           <div className={styles.heroContent}>
-            <p className={styles.eyebrow}><span className={styles.statusDot} aria-hidden="true" />Barcelona · Available for selected projects</p>
-            <h1 id="hero-title" className={styles.title}>Visual, UX/UI &amp;<span> e-learning designer.</span></h1>
-            <p className={styles.description}>I design clear digital experiences, visual identities and interactive learning content.</p>
+            <p className={styles.eyebrow}><span className={styles.statusDot} aria-hidden="true" />Barcelona · Design / Learning / Motion</p>
+            <h1 id="hero-title" className={styles.title}>Design that <span>moves ideas.</span></h1>
+            <p className={styles.description}>I turn complex ideas into expressive digital experiences, learning and moving images.</p>
             <div className={styles.actions}>
               <a href="#work" className={styles.primaryButton}>View selected work <span aria-hidden="true">↓</span></a>
               <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Contact me</a>
             </div>
             <div className={styles.disciplines} aria-label="Design disciplines">
-              <span>E-learning</span><span>UX/UI</span><span>Graphic Design</span><span>Video</span>
+              <span>Digital learning</span><span>UX/UI</span><span>Art direction</span><span>AI-assisted video</span>
             </div>
           </div>
         </section>
@@ -87,7 +90,7 @@ export default function Home() {
         <section id="work" className={styles.section}>
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>01</p>
-            <div><p className={styles.kicker}>Selected work</p><h2>Projects shaped around clarity, learning and visual impact.</h2></div>
+            <div><p className={styles.kicker}>Selected work</p><h2>A selection of ideas made tangible.</h2></div>
           </div>
           <div className={styles.projectGrid}>
             {projects.map((project, index) => {
@@ -119,7 +122,7 @@ export default function Home() {
         <section id="video" className={styles.section}>
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>02</p>
-            <div><p className={styles.kicker}>Motion &amp; video</p><h2>Selected audiovisual work for digital products and learning.</h2></div>
+            <div><p className={styles.kicker}>Motion &amp; video</p><h2>Stories that go beyond the static frame.</h2></div>
           </div>
           <div className={styles.videoGrid}>
             {videos.map((video) => (
@@ -141,7 +144,7 @@ export default function Home() {
           <div className={styles.aboutGrid}>
             <div className={styles.aboutCopy}>
               <p>I’m a multidisciplinary designer based in Barcelona, focused on digital experiences, visual communication and interactive learning.</p>
-              <p>I combine graphic design, UX/UI, instructional design and video to turn complex information into clear, useful and engaging content.</p>
+              <p>I combine graphic design, UX/UI, instructional design and video, exploring how generative AI can support stronger visual storytelling.</p>
               <p className={styles.personalNote}>Outside the screen, sailing has taught me attention, adaptability and calm under pressure.</p>
             </div>
             <div className={styles.capabilities}>
@@ -151,6 +154,7 @@ export default function Home() {
                 <li>E-learning &amp; instructional design</li>
                 <li>Visual identity &amp; graphic design</li>
                 <li>Video editing &amp; motion content</li>
+                <li>AI-assisted visual storytelling &amp; prototyping</li>
               </ul>
             </div>
           </div>
@@ -158,7 +162,7 @@ export default function Home() {
 
         <section id="contact" className={styles.contactSection}>
           <p className={styles.kicker}>Let’s work together</p>
-          <h2>Have a project in mind?</h2>
+          <h2>Let’s make something <em>matter.</em></h2>
           <div className={styles.contactLinks}>
             <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
             <a href="https://www.behance.net/ODIBAZO" target="_blank" rel="noopener noreferrer">Behance <span aria-hidden="true">↗</span></a>

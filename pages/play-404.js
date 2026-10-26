@@ -20,7 +20,7 @@ export default function Play404() {
   const shockRef = useRef(null);
   const resetRef = useRef(null);
   const [hits, setHits] = useState(0);
-  const [message, setMessage] = useState('Move across the 404 or launch an explosion.');
+  const [message, setMessage] = useState('Touch the tiny cubes carefully. Only one falls at a time.');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,10 +34,11 @@ export default function Play404() {
     let active = false;
     let destroyed = false;
     let previous = 0;
-    let pointer = { x: -999, y: -999 };
+    let lastPreciseHit = -Infinity;
 
     function reset() {
       body.length = 0;
+      lastPreciseHit = -Infinity;
       const maskCanvas = document.createElement('canvas');
       const pxWidth = Math.ceil(width);
       const pxHeight = Math.ceil(height);
@@ -194,13 +195,43 @@ export default function Play404() {
       wake();
     }
 
+    // Precision mode: the pointer must actually touch an intact cube.
+    // One hover event can never release more than one block.
+    function knockOne(x, y, now = performance.now()) {
+      if (reduce.matches || now - lastPreciseHit < 140) return false;
+
+      let selected = null;
+      let bestDistance = Infinity;
+      for (const p of body) {
+        if (p.loose) continue;
+        const cx = p.x + p.size / 2;
+        const cy = p.y + p.size / 2;
+        // The hitbox is smaller than one tile: no area-of-effect collisions.
+        const hit = p.size * .45;
+        if (Math.abs(x - cx) > hit || Math.abs(y - cy) > hit) continue;
+        const distance = Math.hypot(x - cx, y - cy);
+        if (distance < bestDistance) {
+          selected = p;
+          bestDistance = distance;
+        }
+      }
+      if (!selected) return false;
+
+      lastPreciseHit = now;
+      selected.loose = true;
+      selected.vx = (Math.random() - .5) * 2.2;
+      selected.vy = -1.8 - Math.random() * 1.5;
+      selected.spin = (Math.random() - .5) * .075;
+      setHits(h => h + 1);
+      setMessage('One cube at a time. How many can you knock down?');
+      wake();
+      return true;
+    }
+
     function onMove(e) {
+      if (e.pointerType === 'touch') return;
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const distance = Math.hypot(x - pointer.x, y - pointer.y);
-      pointer = {x, y};
-      if (distance > 2 && distance < 125) repel(x, y, 2.8, 88);
+      knockOne(e.clientX - rect.left, e.clientY - rect.top);
     }
 
     function burst(x, y) {
@@ -214,7 +245,8 @@ export default function Play404() {
     }
     function onDown(e) {
       const rect = canvas.getBoundingClientRect();
-      burst(e.clientX - rect.left, e.clientY - rect.top);
+      // Click/tap is also precise; only the dedicated chaos button scatters all.
+      knockOne(e.clientX - rect.left, e.clientY - rect.top);
     }
     function onKey(e) {
       if (e.code === 'Space' && !(e.target instanceof HTMLButtonElement) && !(e.target instanceof HTMLAnchorElement)) {
@@ -278,18 +310,18 @@ export default function Play404() {
         <div className="intro">
           <span>NOT FOUND / INTERACTIVE STUDY</span>
           <h1>Break the <em>404.</em></h1>
-          <p>Nothing to see here. So obviously, you should touch everything.</p>
+          <p>Nothing to see here. Catch the cubes one at a time.</p>
         </div>
         <div className="game">
           <canvas
             ref={canvasRef}
-            aria-label="Interactive 404 pixel playground. Click or move to scatter blocks. Use the buttons below to play or reset."
+            aria-label="404 made of tiny squares. Touch a square with your pointer to release it individually. The buttons scatter all squares or reset."
             role="img"
           />
           <div className="controls">
             <div aria-live="polite" className="status">{message} <span>CHAOS: {String(hits).padStart(2, '0')}</span></div>
             <div className="buttons">
-              <button type="button" onClick={() => shockRef.current?.()}>MAKE IT WORSE ↗</button>
+              <button type="button" onClick={() => shockRef.current?.()}>CHAOS MODE ↗</button>
               <button type="button" onClick={() => resetRef.current?.()}>RESET ↺</button>
             </div>
           </div>

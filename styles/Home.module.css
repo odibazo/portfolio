@@ -1,5 +1,5 @@
-.container{--background:#0b0b0c;--surface:#171719;--text:#f4f1ea;--muted:#aaa8a3;--accent:#c8ff65;position:relative;min-height:100svh;padding:0 clamp(24px,6vw,96px);background:var(--background);color:var(--text);overflow:hidden}
-.container::before{content:'';position:absolute;inset:0 0 auto;height:100svh;background:linear-gradient(90deg,rgba(11,11,12,.82) 0%,rgba(11,11,12,.58) 55%,rgba(11,11,12,.42) 100%),linear-gradient(180deg,rgba(11,11,12,.28) 0%,rgba(11,11,12,.3) 58%,var(--background) 100%),url('/images/sea-hero-poster.webp') center/cover no-repeat;pointer-events:none}
+.container{--background:#0b0b0c;--surface:#171719;--text:#f4f1ea;--muted:#aaa8a3;--accent:#d3ff85;position:relative;min-height:100svh;padding:0 clamp(24px,6vw,96px);background:var(--background);color:var(--text);overflow:clip}
+.container::before{content:'';position:absolute;inset:0 0 auto;height:100svh;background:radial-gradient(ellipse at 79% 42%,#142c2c 0%,#0b1012 44%,#090b0d 74%);pointer-events:none}
 .header{position:sticky;top:0;z-index:20;min-height:88px;display:flex;justify-content:space-between;align-items:center;background:transparent}
 .brand{color:var(--text);font-size:1rem;font-weight:700;letter-spacing:-.02em}
 .nav{display:flex;gap:clamp(18px,3vw,40px)}
@@ -8,10 +8,10 @@
 .nav a:hover,.footer a:hover{color:var(--text)}
 .nav a:hover::after,.footer a:hover::after{transform:scaleX(1);transform-origin:left}
 .hero{position:relative;width:100%;min-height:calc(100svh - 88px);padding:clamp(72px,9vw,132px) 0;display:flex;flex-direction:column;justify-content:center}
-.heroContent{position:relative;z-index:1;width:min(1120px,100%)}
+.heroContent{position:relative;z-index:2;width:min(1120px,100%);pointer-events:none}.heroContent a{pointer-events:auto}
 .eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 32px;color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;animation:fadeUp 700ms both}
 .statusDot{width:8px;height:8px;flex:0 0 auto;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(200,255,101,.45);animation:pulse 2.8s infinite}
-.title{max-width:1040px;margin:0;font-size:clamp(3.35rem,8.6vw,8.2rem);line-height:.9;letter-spacing:-.075em;font-weight:500;text-wrap:balance;animation:fadeUp 760ms 80ms both}
+.title{max-width:1050px;margin:0;font-size:clamp(4.4rem,11.4vw,12rem);line-height:.82;letter-spacing:-.085em;font-weight:500;text-wrap:balance;animation:fadeUp 760ms 80ms both}
 .title span{color:var(--muted)}
 .description{max-width:690px;margin:clamp(34px,5vw,60px) 0 0;color:var(--muted);font-size:clamp(1.12rem,2vw,1.55rem);line-height:1.45;animation:fadeUp 760ms 160ms both}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px;animation:fadeUp 760ms 240ms both}
@@ -59,7 +59,7 @@
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,255,101,0)}45%{box-shadow:0 0 0 8px rgba(200,255,101,.12)}}
 @media(max-width:760px){
 .container{padding:0 20px}.header{min-height:74px}.nav{gap:16px}.nav a{font-size:.8rem}
-.hero{min-height:calc(100svh - 74px);padding:70px 0 86px}.container::before{background:linear-gradient(180deg,rgba(11,11,12,.48) 0%,rgba(11,11,12,.46) 55%,var(--background) 100%),url('/images/sea-hero-poster.webp') center/cover no-repeat}.eyebrow{align-items:flex-start;line-height:1.5}.statusDot{margin-top:3px}.title{font-size:clamp(3.1rem,15.5vw,4.8rem)}
+.hero{min-height:calc(100svh - 74px);padding:70px 0 86px}.container::before{background:radial-gradient(ellipse at 75% 44%,#16302d 0%,#0a1012 60%,#090b0d 100%)}.eyebrow{align-items:flex-start;line-height:1.5}.statusDot{margin-top:3px}.title{font-size:clamp(3.1rem,15.5vw,4.8rem)}
 .actions{flex-direction:column}.primaryButton,.secondaryButton{width:100%;box-sizing:border-box}
 .sectionHeader{grid-template-columns:1fr;gap:22px}.projectGrid,.videoGrid,.aboutGrid{grid-template-columns:1fr}.projectGrid{gap:46px}.projectCard:nth-child(even){margin-top:0}
 .projectMeta{align-items:flex-start;flex-direction:column;gap:7px}.projectMeta p{text-align:left}.videoGrid{gap:42px}.aboutGrid{gap:64px}.contactSection h2{font-size:clamp(3.4rem,17vw,5.6rem)}
@@ -69,3 +69,22 @@
 .eyebrow,.title,.description,.actions,.disciplines,.statusDot{animation:none}
 .projectImage img,.primaryButton,.secondaryButton,.contactLinks a,.nav a::after,.footer a::after{transition:none}
 }
+
+/* Portfolio V2 — editorial layout & tidal interaction */
+:global(.tidal-field){position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.9}
+.heroIndex{position:absolute;top:20px;left:0;right:0;z-index:2;display:flex;justify-content:space-between;gap:24px;color:#a1aa9e;font-size:.65rem;letter-spacing:.16em}
+.hero{isolation:isolate;min-height:calc(100svh - 88px);overflow:hidden}
+.heroContent{padding:clamp(45px,5vw,90px) 0}
+.title span{color:var(--accent)}
+.description{color:#dee3d7;max-width:525px;font-size:clamp(1.08rem,1.65vw,1.35rem)}
+.section{border-top:1px solid rgba(227,243,219,.14)}
+.sectionHeader h2{max-width:1100px;font-size:clamp(3rem,7.7vw,7.8rem);letter-spacing:-.07em}
+.projectGrid{gap:90px clamp(18px,3vw,42px)}
+.projectCard:nth-child(2n){transform:translateY(80px)}
+.projectImage{border-radius:0;aspect-ratio:5/4}
+.projectCard:hover .projectImage img{transform:scale(1.075)}
+.projectMeta h3{font-size:1.25rem;letter-spacing:-.03em}
+.videoFrame{border:1px solid rgba(255,255,255,.13)}
+.contactSection h2 em{font-style:normal;color:var(--accent)}
+@media(max-width:760px){.heroIndex{top:12px;font-size:.52rem}.heroIndex span:last-child{display:none}.hero{min-height:calc(100svh - 74px)}.title{font-size:clamp(4rem,17vw,6.1rem)}.projectCard:nth-child(2n){transform:none}.projectGrid{gap:48px}.heroContent{padding:40px 0}.description{max-width:320px}}
+@media(prefers-reduced-motion:reduce){.projectCard:nth-child(2n){transform:none}}

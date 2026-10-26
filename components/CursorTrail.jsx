@@ -53,27 +53,27 @@ export default function CursorTrail() {
     function onMove(event) {
       if (event.pointerType === 'touch' || motion.matches || !finePointer.matches) return;
       const now = performance.now();
-      if (now - last < 17) return;
+      if (now - last < 24) return;
       last = now;
 
       // A distinct geometric trace that is deliberately more graphic than a glow.
       const snap = 12;
-      for (let i = 0; i < 9; i += 1) {
+      for (let i = 0; i < 16; i += 1) {
         const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 30;
+        const radius = Math.random() * 38;
         const x = event.clientX + Math.cos(angle) * radius;
         const y = event.clientY + Math.sin(angle) * radius;
         particles.push({
           x: Math.floor(x / snap) * snap,
           y: Math.floor(y / snap) * snap,
-          time: now - Math.random() * 110,
-          life: 670 + Math.random() * 110,
-          size: Math.random() > .85 ? 11 : 9,
-          opacity: .64 + Math.random() * .34,
-          color: Math.random() > .38 ? '#c8ff65' : '#8eaaa0'
+          time: now - Math.random() * 150,
+          life: 1200 + Math.random() * 350,
+          size: Math.random() > .80 ? 12 : 9,
+          opacity: .70 + Math.random() * .30,
+          color: Math.random() > .27 ? '#c8ff65' : '#f4f1ea'
         });
       }
-      if (particles.length > 210) particles.splice(0, particles.length - 210);
+      if (particles.length > 960) particles.splice(0, particles.length - 960);
       wake();
     }
     function clear() {
@@ -109,6 +109,6 @@ export default function CursorTrail() {
 
   return <canvas ref={canvasRef} aria-hidden="true" style={{
     position: 'fixed', inset: 0, zIndex: 80, width: '100%', height: '100%',
-    pointerEvents: 'none'
+    pointerEvents: 'none', mixBlendMode: 'difference', opacity: 0.98
   }} />;
 }

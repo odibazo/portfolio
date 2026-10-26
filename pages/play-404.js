@@ -2,28 +2,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-// Bold, high-density raster glyphs: around 900-1,000 independently movable cubes.
-const DIGIT_WIDTH = 21;
-const DIGIT_HEIGHT = 29;
-const DIGIT_GAP = 3;
+// Text is rasterized from a heavyweight sans serif, then rebuilt as tiny cubes.
+// Unlike a hand-built bitmap, its outline tracks real typographic shapes.
+const TYPEFACE = "'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif";
 
-function filledAt(digit, x, y) {
-  if (digit === '4') {
-    // Thick upper stroke, extra-heavy crossbar and full-height right stem.
-    const leftStem = y < 18 && x >= Math.max(1, 6 - Math.floor(y / 6)) && x <= 8;
-    const crossbar = y >= 13 && y <= 18 && x >= 1;
-    const rightStem = x >= 14 && x <= 20;
-    return leftStem || crossbar || rightStem;
-  }
-  // A thick rounded zero with a generous counter (hole).
-  const dx = (x - 10) / 10.6;
-  const dy = (y - 14) / 14.8;
-  const outer = Math.pow(Math.abs(dx), 3.2) + Math.pow(Math.abs(dy), 3.2) <= 1.22;
-  const innerDx = (x - 10) / 4.3;
-  const innerDy = (y - 14) / 7.9;
-  const inner = (innerDx * innerDx + innerDy * innerDy) < 1;
-  return outer && !inner;
-}
 const MESSAGES = [
   'Congratulations. You broke an error.',
   'Technically, this is still a website.',
@@ -56,34 +38,65 @@ export default function Play404() {
 
     function reset() {
       body.length = 0;
-      const compact = width < 700;
-      const columns = DIGIT_WIDTH * 3 + DIGIT_GAP * 2;
-      // Fill almost all available width, but preserve breathing room.
-      const stride = Math.max(3.1, Math.min(
-        (width - (compact ? 24 : 70)) / columns,
-        (height - (compact ? 70 : 104)) / DIGIT_HEIGHT
-      ));
-      const cell = stride * .79;
-      const gridWidth = columns * stride;
-      const gridHeight = DIGIT_HEIGHT * stride;
-      const left = (width - gridWidth) / 2;
-      const top = (height - gridHeight) / 2;
+      const maskCanvas = document.createElement('canvas');
+      const pxWidth = Math.ceil(width);
+      const pxHeight = Math.ceil(height);
+      maskCanvas.width = pxWidth;
+      maskCanvas.height = pxHeight;
+      const maskCtx = maskCanvas.getContext('2d', { willReadFrequently: true });
+      if (!maskCtx) return;
 
-      ['4', '0', '4'].forEach((digit, digitIndex) => {
-        for (let y = 0; y < DIGIT_HEIGHT; y += 1) {
-          for (let x = 0; x < DIGIT_WIDTH; x += 1) {
-            if (!filledAt(digit, x, y)) continue;
-            const px = left + (digitIndex * (DIGIT_WIDTH + DIGIT_GAP) + x) * stride;
-            const py = top + y * stride;
-            body.push({
-              x: px, y: py,
-              vx: 0, vy: 0, rotation: 0, spin: 0,
-              size: cell, loose: false,
-              tone: digitIndex === 1 ? '#c8ff65' : '#f4f1ea',
-            });
-          }
+      let fontSize = Math.min(width * .6, height * 1.2);
+      const setFont = () => {
+        maskCtx.font = '900 ' + fontSize + 'px ' + TYPEFACE;
+      };
+      setFont();
+      const initial = maskCtx.measureText('404');
+      const initialHeight = Math.max(1, (initial.actualBoundingBoxAscent || fontSize * .75) +
+        (initial.actualBoundingBoxDescent || fontSize * .03));
+      const scale = Math.min(
+        width * .955 / Math.max(1, initial.width),
+        height * .88 / initialHeight
+      );
+      fontSize *= scale;
+      setFont();
+      const measured = maskCtx.measureText('404');
+      const ascent = measured.actualBoundingBoxAscent || fontSize * .75;
+      const descent = measured.actualBoundingBoxDescent || fontSize * .03;
+      const textX = width / 2;
+      const textY = (height + ascent - descent) / 2;
+
+      maskCtx.textAlign = 'center';
+      maskCtx.textBaseline = 'alphabetic';
+      maskCtx.fillStyle = '#ffffff';
+      maskCtx.strokeStyle = '#ffffff';
+      maskCtx.lineJoin = 'round';
+      // Thickens the font if the OS doesn't offer a real black/900 face.
+      maskCtx.lineWidth = fontSize * .026;
+      maskCtx.strokeText('404', textX, textY);
+      maskCtx.fillText('404', textX, textY);
+
+      const alpha = maskCtx.getImageData(0, 0, pxWidth, pxHeight).data;
+      const step = Math.max(5, Math.min(12, width / 105));
+      const cubeSize = step * .79;
+      const left = (width - measured.width) / 2;
+      const zeroLeft = left + maskCtx.measureText('4').width;
+      const zeroRight = zeroLeft + maskCtx.measureText('0').width;
+
+      for (let y = step / 2; y < height - step / 2; y += step) {
+        for (let x = step / 2; x < width - step / 2; x += step) {
+          const sampleX = Math.min(pxWidth - 1, Math.floor(x));
+          const sampleY = Math.min(pxHeight - 1, Math.floor(y));
+          const index = (sampleY * pxWidth + sampleX) * 4 + 3;
+          if (alpha[index] < 160) continue;
+          body.push({
+            x: x - cubeSize / 2, y: y - cubeSize / 2,
+            vx: 0, vy: 0, rotation: 0, spin: 0,
+            size: cubeSize, loose: false,
+            tone: x >= zeroLeft && x <= zeroRight ? '#c8ff65' : '#f4f1ea',
+          });
         }
-      });
+      }
       setHits(0);
       setMessage('Move across the 404 or launch an explosion.');
       render();
@@ -187,12 +200,12 @@ export default function Play404() {
       const y = e.clientY - rect.top;
       const distance = Math.hypot(x - pointer.x, y - pointer.y);
       pointer = {x, y};
-      if (distance > 2 && distance < 125) repel(x, y, 2.4, 75);
+      if (distance > 2 && distance < 125) repel(x, y, 2.8, 88);
     }
 
     function burst(x, y) {
       if (reduce.matches) return;
-      repel(x, y, 19, Math.max(350, width * .65));
+      repel(x, y, 19, Math.max(430, width * .85));
       setHits(h => {
         const next = h + 1;
         setMessage(MESSAGES[(next - 1) % MESSAGES.length]);
@@ -290,11 +303,11 @@ export default function Play404() {
         .top :global(a):hover,footer :global(a):hover{color:#c8ff65}
         .intro{padding:60px 0 35px}
         .intro span{font-size:12px;color:#c8ff65;letter-spacing:.12em}
-        h1{font-size:clamp(64px,11vw,174px);margin:8px 0 16px;line-height:.91;letter-spacing:-.08em;font-weight:850}
+        h1{font-size:clamp(64px,11vw,174px);margin:8px 0 16px;line-height:.91;letter-spacing:-.08em;font-weight:900;font-family:'Arial Black',Helvetica,Arial,sans-serif}
         h1 em{font-style:normal;color:#c8ff65}
         p{margin:0;color:#aaa8a3;font-size:clamp(15px,1.8vw,20px);line-height:1.4}
         .game{position:relative;border:1px solid #3f4140;background:radial-gradient(ellipse at 50% 30%,#1b221a 0%,#111313 45%,#0b0b0c 85%);margin-bottom:40px}
-        canvas{display:block;width:100%;height:min(62vw,650px);min-height:420px;touch-action:none;cursor:crosshair}
+        canvas{display:block;width:100%;height:min(57vw,660px);min-height:440px;touch-action:none;cursor:crosshair}
         .controls{border-top:1px solid #353535;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px}
         .status{font:12px/1.5 monospace;color:#aaa8a3;display:flex;flex-wrap:wrap;gap:18px}
         .status span{color:#c8ff65;white-space:nowrap}

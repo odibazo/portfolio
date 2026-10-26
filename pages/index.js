@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import MotionController from '../components/MotionController';
 
 const projects = [
   { title: 'Foxize Cloud', category: 'Web design & digital product', image: '/images/foxizecloud-current.jpg', href: 'https://www.foxizecloud.com/' },
@@ -59,7 +60,9 @@ export default function Home() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
 
-      <main id="top" className={styles.container}>
+      <main id="top" className={styles.container} data-motion-root>
+        <MotionController />
+        <div className={styles.scrollProgress} aria-hidden="true" />
         <header className={styles.header}>
           <a href="#top" className={styles.brand} aria-label="Odi Bazó, back to top">Odi Bazó</a>
           <nav className={styles.nav} aria-label="Main navigation">
@@ -71,23 +74,25 @@ export default function Home() {
 
         <section className={styles.hero} aria-labelledby="hero-title">
           <div className={styles.heroContent}>
-            <p className={styles.eyebrow}><span className={styles.statusDot} aria-hidden="true" />Barcelona · Available for selected projects</p>
-            <h1 id="hero-title" className={styles.title}>Visual, UX/UI &amp;<span> e-learning designer.</span></h1>
-            <p className={styles.description}>I design clear digital experiences, visual identities and interactive learning content.</p>
-            <div className={styles.actions}>
+            <p className={styles.eyebrow} data-reveal><span className={styles.statusDot} aria-hidden="true" />Barcelona · Available for selected projects</p>
+            <h1 id="hero-title" className={styles.title} data-reveal>Visual, UX/UI &amp;<span> e-learning designer.</span></h1>
+            <p className={styles.description} data-reveal>I design clear digital experiences, visual identities and interactive learning content.</p>
+            <div className={styles.actions} data-reveal>
               <a href="#work" className={styles.primaryButton}>View selected work <span aria-hidden="true">↓</span></a>
               <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer" className={styles.secondaryButton}>Contact me</a>
             </div>
-            <div className={styles.disciplines} aria-label="Design disciplines">
-              <span>E-learning</span><span>UX/UI</span><span>Graphic Design</span><span>Video</span>
+            <div className={styles.disciplines} aria-label="Design disciplines" data-reveal>
+              <span>E-learning</span><span>UX/UI</span><span>Graphic Design</span><span>Video &amp; AI</span>
             </div>
           </div>
         </section>
 
+        <div className={styles.motionRibbon} aria-hidden="true"><div className={styles.ribbonTrack}><span>VISUAL DESIGN &nbsp;✳&nbsp; DIGITAL LEARNING &nbsp;✳&nbsp; ART DIRECTION &nbsp;✳&nbsp; MOVING IMAGES &nbsp;✳&nbsp;</span><span>VISUAL DESIGN &nbsp;✳&nbsp; DIGITAL LEARNING &nbsp;✳&nbsp; ART DIRECTION &nbsp;✳&nbsp; MOVING IMAGES &nbsp;✳&nbsp;</span></div></div>
+
         <section id="work" className={styles.section}>
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>01</p>
-            <div><p className={styles.kicker}>Selected work</p><h2>Projects shaped around clarity, learning and visual impact.</h2></div>
+            <div data-reveal><p className={styles.kicker}>Selected work</p><h2>Projects shaped around clarity, learning and visual impact.</h2></div>
           </div>
           <div className={styles.projectGrid}>
             {projects.map((project, index) => {
@@ -96,12 +101,13 @@ export default function Home() {
               <CardTag
                 key={project.title}
                 className={styles.projectCard}
+                data-reveal
                 href={project.href}
                 target={project.href ? '_blank' : undefined}
                 rel={project.href ? 'noopener noreferrer' : undefined}
                 aria-label={project.href ? `${project.title}, open project` : undefined}
               >
-                <div className={styles.projectImage}>
+                <div className={styles.projectImage} data-parallax data-parallax-strength={index % 3 === 0 ? 38 : 26}>
                   <Image src={project.image} alt={project.title} fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized={project.unoptimized} />
                   <div className={styles.projectOverlay}>
                     <span>{project.href ? '↗' : String(index + 1).padStart(2, '0')}</span>
@@ -119,11 +125,11 @@ export default function Home() {
         <section id="video" className={styles.section}>
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>02</p>
-            <div><p className={styles.kicker}>Motion &amp; video</p><h2>Selected audiovisual work for digital products and learning.</h2></div>
+            <div data-reveal><p className={styles.kicker}>Motion &amp; video</p><h2>Selected audiovisual work for digital products and learning.</h2></div>
           </div>
           <div className={styles.videoGrid}>
             {videos.map((video) => (
-              <article key={video.src} className={styles.videoCard}>
+              <article key={video.src} className={styles.videoCard} data-reveal>
                 <div className={styles.videoFrame}>
                   <iframe src={video.src} title={video.title} loading="lazy" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                 </div>
@@ -136,30 +142,31 @@ export default function Home() {
         <section id="about" className={styles.section + ' ' + styles.aboutSection}>
           <div className={styles.sectionHeader}>
             <p className={styles.sectionNumber}>03</p>
-            <div><p className={styles.kicker}>About</p><h2>Multidisciplinary by practice, focused by design.</h2></div>
+            <div data-reveal><p className={styles.kicker}>About</p><h2>Multidisciplinary by practice, focused by design.</h2></div>
           </div>
           <div className={styles.aboutGrid}>
-            <div className={styles.aboutCopy}>
+            <div className={styles.aboutCopy} data-reveal>
               <p>I’m a multidisciplinary designer based in Barcelona, focused on digital experiences, visual communication and interactive learning.</p>
               <p>I combine graphic design, UX/UI, instructional design and video to turn complex information into clear, useful and engaging content.</p>
               <p className={styles.personalNote}>Outside the screen, sailing has taught me attention, adaptability and calm under pressure.</p>
             </div>
-            <div className={styles.capabilities}>
+            <div className={styles.capabilities} data-reveal>
               <p className={styles.kicker}>What I do</p>
               <ul>
                 <li>UX/UI &amp; digital product design</li>
                 <li>E-learning &amp; instructional design</li>
                 <li>Visual identity &amp; graphic design</li>
                 <li>Video editing &amp; motion content</li>
+                <li>AI-assisted visual storytelling</li>
               </ul>
             </div>
           </div>
         </section>
 
         <section id="contact" className={styles.contactSection}>
-          <p className={styles.kicker}>Let’s work together</p>
-          <h2>Have a project in mind?</h2>
-          <div className={styles.contactLinks}>
+          <p className={styles.kicker} data-reveal>Let’s work together</p>
+          <h2 data-reveal>Have a project in mind?</h2>
+          <div className={styles.contactLinks} data-reveal>
             <a href="https://www.linkedin.com/in/odibazo" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
             <a href="https://www.behance.net/ODIBAZO" target="_blank" rel="noopener noreferrer">Behance <span aria-hidden="true">↗</span></a>
             <a href="https://www.instagram.com/odditybazo/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>

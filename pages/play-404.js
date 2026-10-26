@@ -2,14 +2,28 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
-const GLYPHS = {
-  '4': [
-    '10001', '10001', '10001', '11111', '00001', '00001', '00001'
-  ],
-  '0': [
-    '01110', '10001', '10011', '10101', '11001', '10001', '01110'
-  ],
-};
+// Bold, high-density raster glyphs: around 900-1,000 independently movable cubes.
+const DIGIT_WIDTH = 21;
+const DIGIT_HEIGHT = 29;
+const DIGIT_GAP = 3;
+
+function filledAt(digit, x, y) {
+  if (digit === '4') {
+    // Thick upper stroke, extra-heavy crossbar and full-height right stem.
+    const leftStem = y < 18 && x >= Math.max(1, 6 - Math.floor(y / 6)) && x <= 8;
+    const crossbar = y >= 13 && y <= 18 && x >= 1;
+    const rightStem = x >= 14 && x <= 20;
+    return leftStem || crossbar || rightStem;
+  }
+  // A thick rounded zero with a generous counter (hole).
+  const dx = (x - 10) / 10.6;
+  const dy = (y - 14) / 14.8;
+  const outer = Math.pow(Math.abs(dx), 3.2) + Math.pow(Math.abs(dy), 3.2) <= 1.22;
+  const innerDx = (x - 10) / 4.3;
+  const innerDy = (y - 14) / 7.9;
+  const inner = (innerDx * innerDx + innerDy * innerDy) < 1;
+  return outer && !inner;
+}
 const MESSAGES = [
   'Congratulations. You broke an error.',
   'Technically, this is still a website.',
@@ -43,26 +57,32 @@ export default function Play404() {
     function reset() {
       body.length = 0;
       const compact = width < 700;
-      const cell = Math.max(12, Math.min(compact ? 18 : 24, width / 30));
-      const stride = cell + (compact ? 3 : 5);
-      const totalCols = 19;
-      const left = (width - totalCols * stride) / 2;
-      const centerY = height * (compact ? 0.42 : 0.43) - (7 * stride) / 2;
+      const columns = DIGIT_WIDTH * 3 + DIGIT_GAP * 2;
+      // Fill almost all available width, but preserve breathing room.
+      const stride = Math.max(3.1, Math.min(
+        (width - (compact ? 24 : 70)) / columns,
+        (height - (compact ? 70 : 104)) / DIGIT_HEIGHT
+      ));
+      const cell = stride * .79;
+      const gridWidth = columns * stride;
+      const gridHeight = DIGIT_HEIGHT * stride;
+      const left = (width - gridWidth) / 2;
+      const top = (height - gridHeight) / 2;
 
-      ['4', '0', '4'].forEach((glyph, letter) => {
-        GLYPHS[glyph].forEach((row, y) => {
-          for (let x = 0; x < row.length; x += 1) {
-            if (row[x] !== '1') continue;
-            const px = left + (letter * 7 + x) * stride;
-            const py = centerY + y * stride;
+      ['4', '0', '4'].forEach((digit, digitIndex) => {
+        for (let y = 0; y < DIGIT_HEIGHT; y += 1) {
+          for (let x = 0; x < DIGIT_WIDTH; x += 1) {
+            if (!filledAt(digit, x, y)) continue;
+            const px = left + (digitIndex * (DIGIT_WIDTH + DIGIT_GAP) + x) * stride;
+            const py = top + y * stride;
             body.push({
-              x: px, y: py, originalX: px, originalY: py,
+              x: px, y: py,
               vx: 0, vy: 0, rotation: 0, spin: 0,
               size: cell, loose: false,
-              tone: letter === 1 ? '#c8ff65' : '#f4f1ea',
+              tone: digitIndex === 1 ? '#c8ff65' : '#f4f1ea',
             });
           }
-        });
+        }
       });
       setHits(0);
       setMessage('Move across the 404 or launch an explosion.');
@@ -90,15 +110,18 @@ export default function Play404() {
       ctx.lineTo(width, ground);
       ctx.stroke();
 
+      // Fast flat draw for resting cubes; rotate only the scattered ones.
       for (const p of body) {
-        ctx.save();
-        ctx.translate(p.x + p.size / 2, p.y + p.size / 2);
-        ctx.rotate(p.rotation);
         ctx.fillStyle = p.tone;
-        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-        ctx.fillStyle = 'rgba(13,13,15,.2)';
-        ctx.fillRect(-p.size / 2 + 3, -p.size / 2 + 3, p.size - 6, p.size - 6);
-        ctx.restore();
+        if (!p.loose || Math.abs(p.rotation) < .002) {
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+        } else {
+          ctx.save();
+          ctx.translate(p.x + p.size / 2, p.y + p.size / 2);
+          ctx.rotate(p.rotation);
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        }
       }
       ctx.fillStyle = 'rgba(244,241,234,.25)';
       ctx.font = '12px monospace';
@@ -169,7 +192,7 @@ export default function Play404() {
 
     function burst(x, y) {
       if (reduce.matches) return;
-      repel(x, y, 19, Math.max(240, Math.min(width * .55, 500)));
+      repel(x, y, 19, Math.max(350, width * .65));
       setHits(h => {
         const next = h + 1;
         setMessage(MESSAGES[(next - 1) % MESSAGES.length]);
@@ -267,11 +290,11 @@ export default function Play404() {
         .top :global(a):hover,footer :global(a):hover{color:#c8ff65}
         .intro{padding:60px 0 35px}
         .intro span{font-size:12px;color:#c8ff65;letter-spacing:.12em}
-        h1{font-size:clamp(64px,11vw,174px);margin:8px 0 16px;line-height:.91;letter-spacing:-.08em;font-weight:500}
+        h1{font-size:clamp(64px,11vw,174px);margin:8px 0 16px;line-height:.91;letter-spacing:-.08em;font-weight:850}
         h1 em{font-style:normal;color:#c8ff65}
         p{margin:0;color:#aaa8a3;font-size:clamp(15px,1.8vw,20px);line-height:1.4}
         .game{position:relative;border:1px solid #3f4140;background:radial-gradient(ellipse at 50% 30%,#1b221a 0%,#111313 45%,#0b0b0c 85%);margin-bottom:40px}
-        canvas{display:block;width:100%;height:min(52vw,500px);min-height:320px;touch-action:none;cursor:crosshair}
+        canvas{display:block;width:100%;height:min(62vw,650px);min-height:420px;touch-action:none;cursor:crosshair}
         .controls{border-top:1px solid #353535;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px}
         .status{font:12px/1.5 monospace;color:#aaa8a3;display:flex;flex-wrap:wrap;gap:18px}
         .status span{color:#c8ff65;white-space:nowrap}
@@ -281,7 +304,7 @@ export default function Play404() {
         button:hover{background:#f4f1ea;color:#111}
         button:focus-visible,.top :global(a):focus-visible{outline:2px solid #c8ff65;outline-offset:3px}
         footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:18px 0 60px;font-size:11px;letter-spacing:.09em;color:#888}
-        @media(max-width:700px){.top{font-size:10px;min-height:70px}.top span{display:none}.intro{padding:42px 0 25px}.controls{align-items:stretch;flex-direction:column}.buttons button{flex:1}footer{font-size:10px}}
+        @media(max-width:700px){canvas{height:390px;min-height:390px}.top{font-size:10px;min-height:70px}.top span{display:none}.intro{padding:42px 0 25px}.controls{align-items:stretch;flex-direction:column}.buttons button{flex:1}footer{font-size:10px}}
         @media(prefers-reduced-motion:reduce){button,.top :global(a),footer :global(a){transition:none}}
       `}</style>
     </>

@@ -69,3 +69,59 @@
 .eyebrow,.title,.description,.actions,.disciplines,.statusDot{animation:none}
 .projectImage img,.primaryButton,.secondaryButton,.contactLinks a,.nav a::after,.footer a::after{transition:none}
 }
+
+
+/* Artistic Obsessions: intentionally light-touch, with no new gallery. */
+.archive{
+  margin-top:clamp(92px,12vw,168px);
+  padding-top:clamp(42px,6vw,72px);
+  border-top:1px solid rgba(244,241,234,.16);
+  display:grid;
+  grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr);
+  gap:clamp(34px,6vw,100px);
+}
+.archiveIntro h3{
+  margin:14px 0 24px;
+  max-width:570px;
+  font-size:clamp(2.7rem,5.5vw,5.8rem);
+  line-height:.98;
+  font-weight:500;
+  letter-spacing:-.06em;
+}
+.archiveIntro h3 span{color:var(--accent)}
+.archiveIntro > p:last-child{
+  max-width:470px;
+  color:var(--muted);
+  line-height:1.6;
+  font-size:clamp(1rem,1.45vw,1.2rem);
+}
+.archiveLinks{align-self:end;border-top:1px solid rgba(244,241,234,.16)}
+.archiveLinks a{
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr) auto 24px;
+  align-items:center;
+  gap:clamp(8px,1.5vw,22px);
+  min-height:112px;
+  padding:18px 2px;
+  color:var(--text);
+  border-bottom:1px solid rgba(244,241,234,.16);
+  transition:padding 250ms ease,background-color 250ms ease;
+}
+.archiveLinks a:hover{padding-left:12px;background-color:rgba(200,255,101,.035)}
+.archiveLinks a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.archiveLinkIndex{color:var(--accent);font-size:.7rem;letter-spacing:.08em}
+.archiveLinkTitle{font-size:clamp(1.05rem,2vw,1.55rem);line-height:1.25;font-weight:500;letter-spacing:-.02em}
+.archiveLinkSite{font-size:.78rem;color:var(--muted)}
+.archiveLinkArrow{
+  font-size:1.25rem;color:var(--accent);
+  transition:transform 250ms ease;
+}
+.archiveLinks a:hover .archiveLinkArrow{transform:translate(3px,-3px)}
+@media(max-width:760px){
+  .archive{grid-template-columns:1fr;margin-top:90px;gap:35px}
+  .archiveLinks a{min-height:94px}
+  .archiveLinkSite{font-size:.7rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .archiveLinks a,.archiveLinkArrow{transition:none}
+}

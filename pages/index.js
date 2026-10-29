@@ -157,6 +157,28 @@ export default function Home() {
               </ul>
             </div>
           </div>
+
+          <div className={styles.archive} aria-labelledby="archive-title">
+            <div className={styles.archiveIntro}>
+              <p className={styles.kicker}>Beyond design / Personal archive</p>
+              <h3 id="archive-title">Artistic <span>Obsessions.</span></h3>
+              <p>Paintings, photography, old designs and visual experiments. A small window into everything that came before.</p>
+            </div>
+            <div className={styles.archiveLinks}>
+              <a href="https://www.flickr.com/photos/odibazo/" target="_blank" rel="noopener noreferrer" aria-label="Explore Odi Bazó's paintings and photography on Flickr (opens in a new tab)">
+                <span className={styles.archiveLinkIndex}>01</span>
+                <span className={styles.archiveLinkTitle}>Paintings &amp; Photography</span>
+                <span className={styles.archiveLinkSite}>Flickr</span>
+                <span className={styles.archiveLinkArrow} aria-hidden="true">↗</span>
+              </a>
+              <a href="https://www.tumblr.com/odibazo" target="_blank" rel="noopener noreferrer" aria-label="Explore Odi Bazó's old designs and experiments on Tumblr (opens in a new tab)">
+                <span className={styles.archiveLinkIndex}>02</span>
+                <span className={styles.archiveLinkTitle}>Old Designs &amp; Experiments</span>
+                <span className={styles.archiveLinkSite}>Tumblr</span>
+                <span className={styles.archiveLinkArrow} aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
         </section>
 
         <section id="contact" className={styles.contactSection}>

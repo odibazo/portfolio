@@ -125,3 +125,37 @@
 @media(prefers-reduced-motion:reduce){
   .archiveLinks a,.archiveLinkArrow{transition:none}
 }
+
+/* The oldest portfolio screenshot is a small archival object, not a new project. */
+.archiveIntro > p:not(.kicker){max-width:470px;color:var(--muted);line-height:1.6;font-size:clamp(1rem,1.45vw,1.2rem)}
+.archiveFirstWebsite{
+  margin:clamp(32px,4.5vw,62px) 0 0;
+  max-width:600px;
+}
+.archiveFirstWebsite a{
+  display:block;
+  background:#fbf52d;
+  border:1px solid rgba(244,241,234,.18);
+  overflow:hidden;
+  outline-offset:5px;
+}
+.archiveFirstWebsite a:focus-visible{outline:2px solid var(--accent)}
+.archiveFirstWebsite img{
+  display:block;width:100%;height:auto;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .5s ease;
+}
+.archiveFirstWebsite a:hover img{transform:scale(1.025);filter:saturate(1.08)}
+.archiveFirstWebsite figcaption{
+  display:flex;flex-wrap:wrap;gap:6px 12px;
+  margin-top:15px;line-height:1.4;font-size:.78rem;color:var(--muted)
+}
+.archiveFirstWebsite figcaption span{
+  color:var(--accent);text-transform:uppercase;letter-spacing:.09em
+}
+.archiveFirstWebsite figcaption strong{
+  color:var(--text);font-weight:500
+}
+@media(prefers-reduced-motion:reduce){
+  .archiveFirstWebsite img{transition:none}
+  .archiveFirstWebsite a:hover img{transform:none}
+}

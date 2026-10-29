@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRef } from 'react';
 import styles from '../styles/Home.module.css';
 import CursorTrail from '../components/CursorTrail';
 
@@ -41,8 +40,6 @@ const structuredData = {
 };
 
 export default function Home() {
-  const firstWebsiteDialogRef = useRef(null);
-
   return (
     <>
       <Head>
@@ -166,48 +163,6 @@ export default function Home() {
               <p className={styles.kicker}>Beyond design / Personal archive</p>
               <h3 id="archive-title">Artistic <span>Obsessions.</span></h3>
               <p>Paintings, photography, old designs and visual experiments. A small window into everything that came before.</p>
-              <figure className={styles.archiveFirstWebsite}>
-                <button
-                  type="button"
-                  className={styles.archiveThumbnailButton}
-                  onClick={() => firstWebsiteDialogRef.current?.showModal()}
-                  aria-haspopup="dialog"
-                  aria-controls="first-website-lightbox"
-                  aria-label="View my first website in a larger popup"
-                >
-                  <Image src="/images/first-website-archive.svg" alt="Odi Bazó's first website, with a yellow diagonal striped background and an early portfolio menu" width={600} height={264} unoptimized />
-                </button>
-                <figcaption><span>From the archive</span><strong>Where it all began.</strong> My first website.</figcaption>
-              </figure>
-              <dialog
-                id="first-website-lightbox"
-                ref={firstWebsiteDialogRef}
-                className={styles.archiveLightbox}
-                aria-labelledby="first-website-caption"
-                onClick={(event) => {
-                  if (event.target === event.currentTarget) event.currentTarget.close();
-                }}
-              >
-                <div className={styles.archiveLightboxInner}>
-                  <button
-                    className={styles.archiveLightboxClose}
-                    type="button"
-                    autoFocus
-                    aria-label="Close image"
-                    onClick={() => firstWebsiteDialogRef.current?.close()}
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                  <Image
-                    src="/images/first-website-archive.svg"
-                    alt="Archival screenshot of the first Odi Bazó website, in yellow and white"
-                    width={1200}
-                    height={528}
-                    unoptimized
-                  />
-                  <p id="first-website-caption">Where it all began. <span>My first website.</span></p>
-                </div>
-              </dialog>
             </div>
             <div className={styles.archiveLinks}>
               <a href="https://www.flickr.com/photos/odibazo/" target="_blank" rel="noopener noreferrer" aria-label="Explore Odi Bazó's paintings and photography on Flickr (opens in a new tab)">

@@ -163,6 +163,12 @@ export default function Home() {
               <p className={styles.kicker}>Beyond design / Personal archive</p>
               <h3 id="archive-title">Artistic <span>Obsessions.</span></h3>
               <p>Paintings, photography, old designs and visual experiments. A small window into everything that came before.</p>
+              <figure className={styles.archiveFirstWebsite}>
+                <a href="/images/first-website-archive.svg" target="_blank" rel="noopener noreferrer" aria-label="Open an archival screenshot of Odi Bazó's first yellow portfolio website">
+                  <Image src="/images/first-website-archive.svg" alt="Odi Bazó's first website, featuring a bold yellow diagonal striped background, white angular space and early design portfolio navigation" width={600} height={264} unoptimized />
+                </a>
+                <figcaption><span>From the archive</span><strong>Where it all began.</strong> My first website.</figcaption>
+              </figure>
             </div>
             <div className={styles.archiveLinks}>
               <a href="https://www.flickr.com/photos/odibazo/" target="_blank" rel="noopener noreferrer" aria-label="Explore Odi Bazó's paintings and photography on Flickr (opens in a new tab)">

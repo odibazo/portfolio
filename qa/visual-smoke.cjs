@@ -29,9 +29,19 @@ const path = require('node:path');
       const width = await page.evaluate(() => ({ doc: document.documentElement.scrollWidth, inner: innerWidth }));
       assert(width.doc <= width.inner + 2, 'Horizontal page overflow: ' + JSON.stringify(width));
       mark(name + ' - no horizontal overflow');
-      await page.locator('#work').scrollIntoViewIfNeeded();
-      await page.waitForTimeout(600);
-      const broken = await page.locator('#work img').evaluateAll((imgs) =>
+      const images = page.locator('#work img');
+      for (let i = 0; i < await images.count(); i++) {
+        const img = images.nth(i);
+        await img.scrollIntoViewIfNeeded();
+        await img.evaluate((im) => new Promise((resolve) => {
+          if (im.complete) return resolve();
+          const done = () => resolve();
+          im.addEventListener('load', done, { once: true });
+          im.addEventListener('error', done, { once: true });
+          setTimeout(done, 3000);
+        }));
+      }
+      const broken = await images.evaluateAll((imgs) =>
         imgs.filter((im) => !im.complete || im.naturalWidth === 0).map((im) => im.getAttribute('src')));
       assert.deepEqual(broken, [], 'Broken project images: ' + broken.join(', '));
       mark(name + ' - project images load');

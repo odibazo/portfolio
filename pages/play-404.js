@@ -138,11 +138,16 @@ export default function Play404() {
         }
       }
       ctx.fillStyle = 'rgba(244,241,234,.25)';
-      ctx.font = '12px monospace';
-      ctx.fillText('ODI BAZÓ / PIXEL PLAYGROUND', 16, 25);
-      ctx.textAlign = 'right';
-      ctx.fillText('PRESS SPACE TO BREAK IT', width - 16, 25);
+      ctx.font = width < 660 ? '11px monospace' : '12px monospace';
       ctx.textAlign = 'left';
+      ctx.fillText('ODI BAZÓ / PIXEL PLAYGROUND', 16, 25);
+      // Do not overlap the identity label on phone-sized canvases.
+      // The keyboard hint only applies where there is room for it.
+      if (width >= 660) {
+        ctx.textAlign = 'right';
+        ctx.fillText('PRESS SPACE TO BREAK IT', width - 16, 25);
+        ctx.textAlign = 'left';
+      }
     }
 
     function tick(time) {

@@ -57,6 +57,32 @@ jobs:
           code=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:3100/not-a-real-page)
           test "$code" = 404
           echo "PASS home, creative 404 route, missing-page status, security headers"
+      - name: Install Chromium browser for visual QA
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Browser QA - desktop, mobile, cursor and interactive 404
+        shell: bash
+        run: |
+          set -euo pipefail
+          PORT=3100 NEXT_TELEMETRY_DISABLED=1 npm run start > /tmp/odi-qa-next.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in {1..40}; do
+            if curl --silent --fail http://127.0.0.1:3100/ -o /dev/null; then ready=1; break; fi
+            sleep 2
+          done
+          if [ "$ready" != 1 ]; then cat /tmp/odi-qa-next.log; exit 1; fi
+          node qa/visual-smoke.cjs
+      - name: Keep visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odi-next16-desktop-mobile-screenshots
+          path: qa-artifacts/
+          if-no-files-found: warn
+          retention-days: 7
       - name: Save verified package lock to audit branch
         if: success()
         shell: bash

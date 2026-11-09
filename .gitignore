@@ -1,0 +1,19 @@
+# Local dependencies and Next.js output
+node_modules/
+.next/
+out/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+
+# Hosting and test artifacts
+.vercel/
+coverage/
+playwright-report/
+test-results/
+
+# OS and logs
+.DS_Store
+*.log

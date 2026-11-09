@@ -1,0 +1,98 @@
+name: Next 16 upgrade verification
+
+on:
+  push:
+    branches:
+      - audit/security-headers-2026-11-03
+    paths:
+      - package.json
+      - package-lock.json
+      - next.config.js
+      - 'pages/**'
+      - 'components/**'
+      - 'styles/**'
+      - '.github/workflows/next16-upgrade-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+      - name: Install Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Refresh dependency lock
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Install reproducibly
+        run: npm ci --no-audit --no-fund
+      - name: Next.js production build
+        run: NEXT_TELEMETRY_DISABLED=1 npm run build
+      - name: Smoke test routes and security headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          PORT=3100 NEXT_TELEMETRY_DISABLED=1 npm run start > /tmp/odi-next.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in {1..40}; do
+            if curl --silent --fail http://127.0.0.1:3100/ -o /tmp/odi-home.html; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+          if [ "$ready" != 1 ]; then cat /tmp/odi-next.log; exit 1; fi
+          grep -q 'Odi Bazó' /tmp/odi-home.html
+          curl --silent --fail http://127.0.0.1:3100/play-404 -o /tmp/odi-play-404.html
+          grep -q '404' /tmp/odi-play-404.html
+          curl --silent --head http://127.0.0.1:3100/ | grep -iq 'x-content-type-options: nosniff'
+          code=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:3100/not-a-real-page)
+          test "$code" = 404
+          echo "PASS home, creative 404 route, missing-page status, security headers"
+      - name: Install Chromium browser for visual QA
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Browser QA - desktop, mobile, cursor and interactive 404
+        shell: bash
+        run: |
+          set -euo pipefail
+          PORT=3100 NEXT_TELEMETRY_DISABLED=1 npm run start > /tmp/odi-qa-next.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in {1..40}; do
+            if curl --silent --fail http://127.0.0.1:3100/ -o /dev/null; then ready=1; break; fi
+            sleep 2
+          done
+          if [ "$ready" != 1 ]; then cat /tmp/odi-qa-next.log; exit 1; fi
+          node qa/visual-smoke.cjs
+      - name: Keep visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odi-next16-desktop-mobile-screenshots
+          path: qa-artifacts/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Save verified package lock to audit branch
+        if: success()
+        shell: bash
+        run: |
+          if ! git diff --quiet -- package-lock.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json
+            git commit -m "chore(test): lock Next.js 16 dependencies after passing build"
+            git push
+          else
+            echo "Package lock unchanged"
+          fi

@@ -123,21 +123,12 @@ export default function OdiStudio() {
           </div>
         </section>
 
-        <section className={studio.ownProject} aria-labelledby="wlw-project-title">
-          <div className={studio.ownProjectHeading}>
-            <p className={home.kicker}>Proyecto propio / En evaluación</p>
-            <h2 id="wlw-project-title">WLW App<span>Conectar mujeres. Descubrir personas. Compartir planes.</span></h2>
-          </div>
-          <div className={studio.ownProjectCopy}>
-            <p>
-              WLW es un proyecto digital independiente que explora nuevas formas de
-              conocer mujeres adultas y descubrir actividades y eventos de la comunidad.
-            </p>
-            <p>
-              Actualmente cuenta con un prototipo interactivo privado en fase de evaluación.
-            </p>
-            <span className={studio.projectStatus}>Prototipo en evaluación</span>
-          </div>
+        <section className={studio.projectReference} aria-label="Proyecto propio">
+          <p className={home.kicker}>Proyecto propio / In progress</p>
+          <Link href="/projects/wlw" className={studio.projectReferenceLink}>
+            <span>WLW App</span>
+            <span>Ver proyecto ↗</span>
+          </Link>
         </section>
 
         <section className={studio.contact} aria-labelledby="studio-contact-title">

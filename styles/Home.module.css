@@ -135,3 +135,36 @@
   .header { flex-wrap: wrap; gap: 10px; padding: 12px 0; }
   .nav { width: 100%; justify-content: space-between; }
 }
+
+
+/* WLW case-study preview: the existing approved app screenshot, not a new brand treatment. */
+.projectMockup {
+  background: radial-gradient(ellipse at 50% 36%, #323b43 0%, #1a2026 36%, #101315 100%);
+}
+.projectMockup img {
+  object-fit: contain;
+  padding: clamp(12px, 3vw, 22px) 0;
+  box-sizing: border-box;
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,.4));
+}
+.progressRibbon {
+  position: absolute;
+  top: 24px;
+  right: -54px;
+  z-index: 4;
+  width: 190px;
+  padding: 8px 0;
+  transform: rotate(35deg);
+  background: var(--accent);
+  color: #10120d;
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,.24);
+  pointer-events: none;
+}
+@media (max-width: 760px) {
+  .projectMockup img { padding: 14px 0; }
+  .progressRibbon { top: 26px; }
+}

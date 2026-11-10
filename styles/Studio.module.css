@@ -71,7 +71,7 @@
   font-size: clamp(1.6rem, 2.45vw, 2.5rem);
   font-weight: 500;
   line-height: 1.05;
-  letter-spacing: -.045em;
+  letter-spacing: -.024em;
 }
 .serviceIntro {
   margin: auto 0 0;
@@ -155,7 +155,7 @@
   font-size: clamp(2.6rem, 6vw, 5.2rem);
   font-weight: 500;
   line-height: 1;
-  letter-spacing: -.06em;
+  letter-spacing: -.035em;
 }
 .projectReferenceLink span:last-child {
   font-size: .95rem;
@@ -175,7 +175,7 @@
   font-size: clamp(2.8rem, 6vw, 6.5rem);
   font-weight: 500;
   line-height: .98;
-  letter-spacing: -.065em;
+  letter-spacing: -.035em;
 }
 .contact p:not(.kicker) {
   max-width: 710px;

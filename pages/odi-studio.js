@@ -9,16 +9,34 @@ const services = [
     number: '01',
     title: 'Diseño digital',
     description: 'Identidad visual, diseño gráfico, UX/UI, landing pages y sitios web.',
+    details: [
+      'Identidad visual y sistemas gráficos.',
+      'Diseño UX/UI y prototipos.',
+      'Landing pages y sitios web.',
+      'Piezas digitales y materiales de marca.',
+    ],
   },
   {
     number: '02',
     title: 'Eventos y comunidades',
     description: 'Cartelería, campañas digitales, piezas para redes y materiales promocionales.',
+    details: [
+      'Carteles y piezas promocionales.',
+      'Creatividades para redes sociales.',
+      'Invitaciones, entradas y materiales digitales.',
+      'Páginas de presentación e inscripción.',
+    ],
   },
   {
     number: '03',
     title: 'E-learning',
     description: 'Diseño y producción de cursos con Articulate Rise 360, contenidos interactivos y SCORM.',
+    details: [
+      'Cursos con Articulate Rise 360.',
+      'Microlearning y contenidos interactivos.',
+      'Cuestionarios y recursos multimedia.',
+      'Exportación SCORM para plataformas LMS.',
+    ],
   },
 ];
 
@@ -89,9 +107,36 @@ export default function OdiStudio() {
               <article className={studio.serviceCard} key={service.number}>
                 <p className={studio.serviceNum}>{service.number} / 03</p>
                 <h2>{service.title}</h2>
-                <p>{service.description}</p>
+                <p className={studio.serviceIntro}>{service.description}</p>
+                <details className={studio.serviceDetails}>
+                  <summary>
+                    <span className={studio.moreLabel}>Ver detalles</span>
+                    <span className={studio.lessLabel}>Ocultar detalles</span>
+                    <span className={studio.toggleIcon} aria-hidden="true">+</span>
+                  </summary>
+                  <ul>
+                    {service.details.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </details>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className={studio.ownProject} aria-labelledby="wlw-project-title">
+          <div className={studio.ownProjectHeading}>
+            <p className={home.kicker}>Proyecto propio / En evaluación</p>
+            <h2 id="wlw-project-title">WLW App<span>Conectar mujeres. Descubrir personas. Compartir planes.</span></h2>
+          </div>
+          <div className={studio.ownProjectCopy}>
+            <p>
+              WLW es un proyecto digital independiente que explora nuevas formas de
+              conocer mujeres adultas y descubrir actividades y eventos de la comunidad.
+            </p>
+            <p>
+              Actualmente cuenta con un prototipo interactivo privado en fase de evaluación.
+            </p>
+            <span className={studio.projectStatus}>Prototipo en evaluación</span>
           </div>
         </section>
 

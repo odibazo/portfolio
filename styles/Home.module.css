@@ -149,20 +149,23 @@
 }
 .progressRibbon {
   position: absolute;
-  top: 58px;
-  right: 22px;
+  top: 0;
+  left: 0;
+  right: auto;
   z-index: 4;
-  width: 242px;
-  padding: 14px 0;
-  transform: rotate(18deg);
+  width: max-content;
+  max-width: 100%;
+  padding: 13px 20px;
+  transform: none;
+  border-radius: 0 0 8px 0;
   background: var(--accent);
   color: #10120d;
-  font-size: .86rem;
+  font-size: .82rem;
   font-weight: 800;
-  letter-spacing: .13em;
+  letter-spacing: .12em;
   line-height: 1.2;
-  text-align: center;
-  box-shadow: 0 6px 22px rgba(0,0,0,.3);
+  text-align: left;
+  box-shadow: 0 5px 17px rgba(0,0,0,.25);
   pointer-events: none;
 }
 @media (max-width: 760px) {

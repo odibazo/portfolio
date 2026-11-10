@@ -49,7 +49,7 @@ export default function OdiStudio() {
             <Link href="/#work">Work</Link>
             <Link href="/#video">Video</Link>
             <Link href="/#about">About</Link>
-            <Link href="/odi-studio" aria-current="page" className={studio.activeNav}>Studio</Link>
+            <Link href="/odi-studio" aria-current="page" className={studio.activeNav}>ODI Studio</Link>
           </nav>
         </header>
 

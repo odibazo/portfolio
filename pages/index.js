@@ -69,6 +69,7 @@ export default function Home() {
             <a href="#work">Work</a>
             <a href="#video">Video</a>
             <a href="#about">About</a>
+            <a href="/odi-studio">ODI Studio</a>
           </nav>
         </header>
 

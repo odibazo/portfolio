@@ -51,17 +51,20 @@
 .ribbon {
   position: absolute;
   z-index: 3;
-  top: 38px;
-  right: -59px;
-  width: 220px;
-  padding: 10px 0;
-  transform: rotate(35deg);
+  top: 60px;
+  right: 24px;
+  width: 250px;
+  padding: 15px 0;
+  transform: rotate(18deg);
   background: var(--accent);
   color: #111;
-  font-size: .72rem;
+  font-size: .86rem;
   font-weight: 800;
   letter-spacing: .13em;
+  line-height: 1.2;
   text-align: center;
+  box-shadow: 0 6px 22px rgba(0,0,0,.3);
+  pointer-events: none;
 }
 .caseCopy h2 {
   margin: 18px 0 32px;

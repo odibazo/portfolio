@@ -134,52 +134,34 @@
 .serviceDetails li + li {
   margin-top: 8px;
 }
-.ownProject {
+.projectReference {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-  gap: clamp(36px, 8vw, 120px);
-  padding: clamp(78px, 10vw, 135px) 0;
-  border-top: 1px solid rgba(244, 241, 234, .15);
+  padding: clamp(64px, 9vw, 108px) 0;
+  border-top: 1px solid rgba(244,241,234,.16);
+  border-bottom: 1px solid rgba(244,241,234,.16);
 }
-.ownProjectHeading h2 {
-  max-width: 750px;
-  margin: 19px 0 0;
+.projectReferenceLink {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 25px;
   color: var(--text);
-  font-size: clamp(3.2rem, 6.6vw, 7rem);
+  text-decoration: none;
+}
+.projectReferenceLink span:first-child {
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
   font-weight: 500;
-  line-height: .98;
-  letter-spacing: -.065em;
+  line-height: 1;
+  letter-spacing: -.06em;
 }
-.ownProjectHeading h2 span {
-  display: block;
-  margin-top: 26px;
-  color: var(--muted);
-  font-size: .39em;
-  font-weight: 500;
-  line-height: 1.17;
-  letter-spacing: -.035em;
-}
-.ownProjectCopy {
-  align-self: end;
-}
-.ownProjectCopy p {
-  margin: 0 0 20px;
-  color: var(--muted);
-  font-size: clamp(1.03rem, 1.65vw, 1.3rem);
-  line-height: 1.58;
-}
-.projectStatus {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 10px 14px;
-  border: 1px solid rgba(200, 255, 101, .35);
-  border-radius: 999px;
+.projectReferenceLink span:last-child {
+  font-size: .95rem;
   color: var(--accent);
-  font-size: .78rem;
-  letter-spacing: .02em;
 }
+.projectReferenceLink:hover span:last-child { text-decoration: underline; }
 .contact {
   position: relative;
   z-index: 1;
@@ -212,7 +194,6 @@
   .serviceCard { min-height: 0; }
   .serviceNum { margin-bottom: 20px; }
   .serviceIntro { margin-top: 16px; padding-top: 0; }
-  .ownProject { grid-template-columns: 1fr; gap: 36px; }
 }
 @media (max-width: 760px) {
   .hero { padding: 85px 0 68px; }
@@ -223,8 +204,7 @@
   .serviceGrid { gap: 14px; }
   .serviceCard { padding: 26px; border-radius: 18px; }
   .serviceDetails { margin-top: 18px; }
-  .ownProject { padding: 82px 0; }
-  .ownProjectHeading h2 { font-size: clamp(3.2rem, 15vw, 5rem); }
+  .projectReference { padding: 65px 0; }
   .contact { padding: 82px 0 90px; }
   .contactActions { flex-direction: column; }
   .contactActions a { width: 100%; box-sizing: border-box; }

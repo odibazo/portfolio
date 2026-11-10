@@ -1,0 +1,134 @@
+.page {
+  isolation: isolate;
+}
+.page::before {
+  z-index: -1;
+}
+.page a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+.page .activeNav {
+  color: var(--text);
+}
+.page .activeNav::after {
+  transform: scaleX(1);
+}
+.hero {
+  min-height: 0;
+  padding: clamp(90px, 12vw, 154px) 0 clamp(74px, 9vw, 110px);
+}
+.heading {
+  max-width: 1160px;
+  font-size: clamp(4.2rem, 8.25vw, 8.2rem);
+}
+.heading span {
+  display: block;
+  max-width: 1160px;
+  margin-top: .14em;
+  font-size: .67em;
+  line-height: 1.04;
+  text-wrap: pretty;
+}
+.intro {
+  max-width: 750px;
+  margin-top: clamp(28px, 3.8vw, 42px);
+}
+.serviceSection {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 clamp(100px, 14vw, 180px);
+}
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+}
+.serviceCard {
+  min-height: 265px;
+  padding: clamp(24px, 2.4vw, 34px);
+  border: 1px solid rgba(244, 241, 234, .25);
+  border-radius: 24px;
+  background: rgba(11, 11, 12, .62);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.serviceCard:hover {
+  border-color: rgba(200, 255, 101, .7);
+  background: rgba(23, 23, 25, .75);
+}
+.serviceNum {
+  margin: 0 0 30px;
+  color: var(--accent);
+  font-size: .8rem;
+  letter-spacing: .08em;
+}
+.serviceCard h2 {
+  margin: 0 0 20px;
+  color: var(--text);
+  font-size: clamp(1.6rem, 2.45vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.045em;
+}
+.serviceCard p:last-child {
+  margin: auto 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.contact {
+  position: relative;
+  z-index: 1;
+  padding: clamp(85px, 12vw, 135px) 0 clamp(95px, 12vw, 145px);
+  border-top: 1px solid rgba(244, 241, 234, .15);
+}
+.contact h2 {
+  max-width: 900px;
+  margin: 18px 0 30px;
+  color: var(--text);
+  font-size: clamp(2.8rem, 6vw, 6.5rem);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.065em;
+}
+.contact p:not(.kicker) {
+  max-width: 710px;
+  margin: 0 0 35px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.5;
+}
+.contactActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+@media (max-width: 960px) {
+  .serviceGrid { grid-template-columns: 1fr; }
+  .serviceCard { min-height: 0; }
+  .serviceNum { margin-bottom: 20px; }
+  .serviceCard p:last-child { margin-top: 16px; padding-top: 0; }
+}
+@media (max-width: 760px) {
+  .hero { padding: 85px 0 68px; }
+  .heading { font-size: clamp(3.7rem, 14vw, 5rem); }
+  .heading span { font-size: .72em; line-height: 1.03; }
+  .intro { margin-top: 28px; }
+  .serviceSection { padding-bottom: 100px; }
+  .serviceGrid { gap: 14px; }
+  .serviceCard { padding: 26px; border-radius: 18px; }
+  .contact { padding: 82px 0 90px; }
+  .contactActions { flex-direction: column; }
+  .contactActions a { width: 100%; box-sizing: border-box; }
+}
+@media (max-width: 400px) {
+  .heading { font-size: clamp(3.1rem, 13vw, 4rem); }
+  .heading span { font-size: .8em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .serviceCard { transition: none; }
+}

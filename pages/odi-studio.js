@@ -9,16 +9,34 @@ const services = [
     number: '01',
     title: 'Diseño digital',
     description: 'Identidad visual, diseño gráfico, UX/UI, landing pages y sitios web.',
+    details: [
+      'Identidad visual y sistemas gráficos.',
+      'Diseño UX/UI y prototipos.',
+      'Landing pages y sitios web.',
+      'Piezas digitales y materiales de marca.',
+    ],
   },
   {
     number: '02',
     title: 'Eventos y comunidades',
     description: 'Cartelería, campañas digitales, piezas para redes y materiales promocionales.',
+    details: [
+      'Carteles y piezas promocionales.',
+      'Creatividades para redes sociales.',
+      'Invitaciones, entradas y materiales digitales.',
+      'Páginas de presentación e inscripción.',
+    ],
   },
   {
     number: '03',
     title: 'E-learning',
     description: 'Diseño y producción de cursos con Articulate Rise 360, contenidos interactivos y SCORM.',
+    details: [
+      'Cursos con Articulate Rise 360.',
+      'Microlearning y contenidos interactivos.',
+      'Cuestionarios y recursos multimedia.',
+      'Exportación SCORM para plataformas LMS.',
+    ],
   },
 ];
 
@@ -89,10 +107,28 @@ export default function OdiStudio() {
               <article className={studio.serviceCard} key={service.number}>
                 <p className={studio.serviceNum}>{service.number} / 03</p>
                 <h2>{service.title}</h2>
-                <p>{service.description}</p>
+                <p className={studio.serviceIntro}>{service.description}</p>
+                <details className={studio.serviceDetails}>
+                  <summary>
+                    <span className={studio.moreLabel}>Ver detalles</span>
+                    <span className={studio.lessLabel}>Ocultar detalles</span>
+                    <span className={studio.toggleIcon} aria-hidden="true">+</span>
+                  </summary>
+                  <ul>
+                    {service.details.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </details>
               </article>
             ))}
           </div>
+        </section>
+
+        <section className={studio.projectReference} aria-label="Proyecto propio">
+          <p className={home.kicker}>Proyecto propio / In progress</p>
+          <Link href="/projects/wlw" className={studio.projectReferenceLink}>
+            <span>WLW App</span>
+            <span>Ver proyecto ↗</span>
+          </Link>
         </section>
 
         <section className={studio.contact} aria-labelledby="studio-contact-title">

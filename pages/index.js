@@ -6,6 +6,7 @@ import CursorTrail from '../components/CursorTrail';
 const projects = [
   { title: 'Foxize Cloud', category: 'Web design & digital product', image: '/images/foxizecloud-current.jpg', href: 'https://www.foxizecloud.com/' },
   { title: 'Foxize', category: 'Corporate website & digital design', image: '/images/foxize-current.jpg', href: 'https://www.foxize.com/' },
+  { title: 'WLW', category: 'App concept · UX/UI · In progress', image: '/images/wlw-preview-v11.png', href: '/projects/wlw', inProgress: true, mockup: true, alt: 'WLW app prototype, discovery screen with fictional profiles' },
   { title: 'PER Cards', category: 'Product & game design', image: '/images/PER-CARDS-2020ODIBAZO-9-1.webp', href: 'https://www.behance.net/gallery/107191195/La-baraja-de-cartas-para-PER' },
   { title: 'Today I’m', category: 'Mobile app design', image: '/images/TODAYIM_PRESENTACION01-01-low.png' },
   { title: 'BcnByBike', category: 'Mobile experience', image: '/images/webBCNBYBIKE-artboard1.webp' },
@@ -105,8 +106,9 @@ export default function Home() {
                 rel={project.href && project.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={project.href ? `${project.title}, open project` : undefined}
               >
-                <div className={styles.projectImage}>
-                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized={project.unoptimized} />
+                <div className={[styles.projectImage, project.mockup ? styles.projectMockup : ''].filter(Boolean).join(' ')}>
+                  <Image src={project.image} alt={project.alt || project.title} fill sizes="(max-width: 760px) 100vw, 50vw" unoptimized={project.unoptimized} />
+                  {project.inProgress && <span className={styles.progressRibbon}>IN PROGRESS</span>}
                   <div className={styles.projectOverlay}>
                     <span>{project.href ? '↗' : String(index + 1).padStart(2, '0')}</span>
                   </div>

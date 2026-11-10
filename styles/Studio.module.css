@@ -73,13 +73,95 @@
   line-height: 1.05;
   letter-spacing: -.045em;
 }
-.serviceCard p:last-child {
+.serviceIntro {
   margin: auto 0 0;
   padding-top: 12px;
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.55;
 }
+.serviceDetails {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(244, 241, 234, .16);
+}
+.serviceDetails summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  color: var(--text);
+  font-size: .92rem;
+  cursor: pointer;
+  list-style: none;
+}
+.serviceDetails summary::-webkit-details-marker {
+  display: none;
+}
+.serviceDetails summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.toggleIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 300;
+  transition: transform 180ms ease;
+}
+.serviceDetails[open] .toggleIcon {
+  transform: rotate(45deg);
+}
+.lessLabel,
+.serviceDetails[open] .moreLabel {
+  display: none;
+}
+.serviceDetails[open] .lessLabel {
+  display: inline;
+}
+.serviceDetails ul {
+  margin: 8px 0 2px;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: .94rem;
+  line-height: 1.65;
+}
+.serviceDetails li + li {
+  margin-top: 8px;
+}
+.projectReference {
+  position: relative;
+  z-index: 1;
+  padding: clamp(64px, 9vw, 108px) 0;
+  border-top: 1px solid rgba(244,241,234,.16);
+  border-bottom: 1px solid rgba(244,241,234,.16);
+}
+.projectReferenceLink {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 25px;
+  color: var(--text);
+  text-decoration: none;
+}
+.projectReferenceLink span:first-child {
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.06em;
+}
+.projectReferenceLink span:last-child {
+  font-size: .95rem;
+  color: var(--accent);
+}
+.projectReferenceLink:hover span:last-child { text-decoration: underline; }
 .contact {
   position: relative;
   z-index: 1;
@@ -111,7 +193,7 @@
   .serviceGrid { grid-template-columns: 1fr; }
   .serviceCard { min-height: 0; }
   .serviceNum { margin-bottom: 20px; }
-  .serviceCard p:last-child { margin-top: 16px; padding-top: 0; }
+  .serviceIntro { margin-top: 16px; padding-top: 0; }
 }
 @media (max-width: 760px) {
   .hero { padding: 85px 0 68px; }
@@ -121,6 +203,8 @@
   .serviceSection { padding-bottom: 100px; }
   .serviceGrid { gap: 14px; }
   .serviceCard { padding: 26px; border-radius: 18px; }
+  .serviceDetails { margin-top: 18px; }
+  .projectReference { padding: 65px 0; }
   .contact { padding: 82px 0 90px; }
   .contactActions { flex-direction: column; }
   .contactActions a { width: 100%; box-sizing: border-box; }
@@ -130,5 +214,5 @@
   .heading span { font-size: .8em; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .serviceCard { transition: none; }
+  .serviceCard, .toggleIcon { transition: none; }
 }

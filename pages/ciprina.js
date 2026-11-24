@@ -78,7 +78,6 @@ export default function WhatIsCiprina() {
         <section className="intro" aria-labelledby="ciprina-title">
           <div className="introTop">
             <span className="label">AN ARCHIVE REIMAGINED</span>
-            <span className="edition">WEB EXPERIMENT / 2026</span>
           </div>
           <h1 id="ciprina-title">WHAT IS<br /><em>CIPRINA?</em></h1>
           <p>Seven languages. One intimate word.<br />An editorial exploration of anatomy, translation and desire.</p>
@@ -94,15 +93,7 @@ export default function WhatIsCiprina() {
           </div>
           <div className="track" ref={track} onScroll={onScroll} tabIndex={0} aria-label="Horizontal gallery of seven translations, use arrow buttons or swipe to explore">
             <div className="artColumn" data-column>
-              <svg className="artwork" viewBox="0 0 300 450" role="img" aria-labelledby="artTitle" xmlns="http://www.w3.org/2000/svg">
-                <title id="artTitle">Abstract intimate symbol based on the original pink and blue Ciprina illustration by Odi Bazó</title>
-                <path d="M88 55 C46 143 59 293 113 390" fill="none" stroke="#DB578C" strokeWidth="24" strokeLinecap="round"/>
-                <path d="M210 32 C235 132 251 294 219 404" fill="none" stroke="#DB578C" strokeWidth="24" strokeLinecap="round"/>
-                <path d="M154 67 C124 56 111 116 111 192 C111 293 144 367 173 388" fill="none" stroke="#57BFD7" strokeWidth="29" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M158 168 C138 185 136 234 142 276 C148 318 166 319 171 278 C176 239 178 183 158 168Z" fill="#57BFD7"/>
-                <path d="M160 203 C156 221 155 245 159 267" fill="none" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" opacity=".72"/>
-              </svg>
-              <p className="artNote">An abstract symbol<br />from the original project.</p>
+              <img className="artwork" src="data:image/webp;base64,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" alt="Ilustración original de Ciprina de Odi Bazó, en rosa y azul claro" />
               <span className="artFooter">CIPRINA / ODI BAZÓ</span>
             </div>
             {entries.map((entry, index) => (
@@ -162,7 +153,7 @@ export default function WhatIsCiprina() {
         .track::-webkit-scrollbar{display:none}
         .artColumn,.languageColumn{width:clamp(270px,27vw,355px);flex:0 0 clamp(270px,27vw,355px);min-height:555px;scroll-snap-align:start;position:relative}
         .artColumn{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 22px 52px 0}
-        .artwork{width:min(100%,280px);height:385px}
+        .artwork{width:min(100%,280px);height:385px;object-fit:contain}
         .artNote{text-align:center;color:var(--soft);font-family:Georgia,serif;font-style:italic;font-size:14px;line-height:1.45;margin:0}
         .artFooter{position:absolute;bottom:26px;left:0;color:var(--soft);font-size:10px;letter-spacing:.16em}
         .languageColumn{padding:28px 28px 60px 2px;display:flex;flex-direction:column}

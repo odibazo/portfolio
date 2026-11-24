@@ -140,18 +140,18 @@ export default function WhatIsCiprina() {
       <style jsx>{`
         *{box-sizing:border-box}
         .ciprina{--ink:#1a1b1e;--soft:#73757b;--line:#dedede;background:#fff;color:var(--ink);min-height:100vh;font-family:Arial,Helvetica,sans-serif;letter-spacing:.016em;overflow:hidden}
-        .sitebar{display:flex;justify-content:space-between;align-items:center;padding:27px clamp(20px,5vw,82px);border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.13em;font-weight:700}
+        .sitebar{display:flex;justify-content:space-between;align-items:center;padding:27px clamp(20px,5vw,82px);font-size:11px;letter-spacing:.13em;font-weight:700}
         .sitebar :global(a){color:var(--ink)}
         .back{display:inline-flex;align-items:center;gap:13px}
         .back:first-letter{font-size:19px}
         .signature{font-size:11px;display:flex;gap:14px;align-items:center}
         .intro{padding:clamp(55px,8vw,116px) clamp(20px,5vw,82px) clamp(55px,7vw,94px);max-width:1450px}
         .introTop{display:flex;justify-content:space-between;gap:20px;color:var(--soft);font-size:10px;letter-spacing:.19em;font-weight:700}
-        .intro h1{font-size:clamp(64px,10.2vw,164px);line-height:.86;letter-spacing:-.076em;font-weight:600;margin:48px 0 35px;text-transform:uppercase}
+        .intro h1{font-size:clamp(48px,7vw,110px);line-height:.86;letter-spacing:-.076em;font-weight:600;margin:48px 0 35px;text-transform:uppercase}
         .intro h1 em{font-family:Georgia,'Times New Roman',serif;letter-spacing:-.072em;font-weight:400}
         .intro>p{font-family:Georgia,'Times New Roman',serif;font-size:clamp(16px,1.65vw,22px);line-height:1.5;letter-spacing:0;margin:0;color:#505057}
-        .work{border-top:1px solid var(--line)}
-        .workTop{display:flex;align-items:center;justify-content:space-between;padding:15px clamp(20px,5vw,82px);border-bottom:1px solid var(--line)}
+        .work{}
+        .workTop{display:flex;align-items:center;justify-content:space-between;padding:15px clamp(20px,5vw,82px)}
         .workCaption{display:flex;gap:25px;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--soft)}
         .workCaption span:first-child{color:var(--ink)}
         .controls{display:flex;gap:12px}
@@ -160,7 +160,7 @@ export default function WhatIsCiprina() {
         .controls button:focus-visible{outline:2px solid #DB578C;outline-offset:3px}
         .track{display:flex;gap:24px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:0 clamp(20px,5vw,82px) 0;scrollbar-width:none;outline-offset:-3px}
         .track::-webkit-scrollbar{display:none}
-        .artColumn,.languageColumn{width:clamp(270px,27vw,355px);flex:0 0 clamp(270px,27vw,355px);min-height:555px;scroll-snap-align:start;position:relative;border-right:1px solid var(--line)}
+        .artColumn,.languageColumn{width:clamp(270px,27vw,355px);flex:0 0 clamp(270px,27vw,355px);min-height:555px;scroll-snap-align:start;position:relative}
         .artColumn{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 22px 52px 0}
         .artwork{width:min(100%,280px);height:385px}
         .artNote{text-align:center;color:var(--soft);font-family:Georgia,serif;font-style:italic;font-size:14px;line-height:1.45;margin:0}
@@ -169,7 +169,7 @@ export default function WhatIsCiprina() {
         .columnNumber{color:#95979d;font-size:10px;letter-spacing:.14em;margin-bottom:62px}
         .flagRow{display:flex;align-items:center;gap:14px;margin-bottom:25px}
         .flag{font-size:27px;line-height:1}
-        .senyera{display:inline-block;width:36px;height:24px;border:1px solid #d1b862;background:repeating-linear-gradient(to bottom,#f4cf30 0 2.67px,#c93131 2.67px 5.33px);background-size:100% 21.33px}
+        .senyera{display:inline-block;width:36px;height:24px;background:repeating-linear-gradient(to bottom,#f4cf30 0 2.67px,#c93131 2.67px 5.33px);background-size:100% 21.33px}
         .langName{text-transform:uppercase;font-size:11px;letter-spacing:.15em;color:var(--soft);font-weight:700}
         .languageColumn h2{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:clamp(38px,3vw,51px);line-height:1.1;letter-spacing:-.055em;font-weight:400;margin:0 0 36px}
         .definition{margin-bottom:26px}
@@ -177,16 +177,16 @@ export default function WhatIsCiprina() {
         .definition p{font-size:15px;line-height:1.6;letter-spacing:0;margin:11px 0 0;max-width:295px}
         .poetic p{font-family:Georgia,'Times New Roman',serif;font-size:17px;font-style:italic;line-height:1.5;color:#4d4e55}
         .columnFoot{font-size:9px;letter-spacing:.15em;color:#a3a4a8;margin-top:auto}
-        .progress{height:2px;background:#ececed;position:relative;overflow:hidden}
+        .progress{display:none}
         .progress>span{display:block;position:absolute;top:0;left:0;width:18%;height:100%;background:#1b1b1b;transform:translateX(0)}
         .scrollHint{text-align:right;padding:17px clamp(20px,5vw,82px);font-size:9px;color:#9a9ca0;letter-spacing:.12em}
         .bottom{padding:100px clamp(20px,5vw,82px) 55px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
         .bottom p{margin:0;color:#777;line-height:1.8;font-size:10px;letter-spacing:.1em}
-        .bottom :global(a){color:var(--ink);font-weight:700;font-size:10px;letter-spacing:.1em;border-bottom:1px solid var(--ink);padding-bottom:8px}
+        .bottom :global(a){color:var(--ink);font-weight:700;font-size:10px;letter-spacing:.1em;padding-bottom:8px}
         @media(max-width:760px){
           .sitebar{padding-top:22px;padding-bottom:22px}
           .intro{padding-top:60px}
-          .intro h1{font-size:clamp(60px,13vw,96px);margin:35px 0}
+          .intro h1{font-size:clamp(44px,10vw,72px);margin:35px 0}
           .edition{display:none}
           .track{gap:18px}
           .artColumn,.languageColumn{width:min(83vw,330px);flex-basis:min(83vw,330px);min-height:540px}

@@ -180,6 +180,12 @@ export default function Home() {
                 <span className={styles.archiveLinkSite}>Tumblr</span>
                 <span className={styles.archiveLinkArrow} aria-hidden="true">↗</span>
               </a>
+              <a href="/ciprina" aria-label="Open What Is Ciprina, an interactive multilingual visual experiment">
+                <span className={styles.archiveLinkIndex}>03</span>
+                <span className={styles.archiveLinkTitle}>What Is Ciprina?</span>
+                <span className={styles.archiveLinkSite}>Interactive archive</span>
+                <span className={styles.archiveLinkArrow} aria-hidden="true">↗</span>
+              </a>
             </div>
           </div>
         </section>

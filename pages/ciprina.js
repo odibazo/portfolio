@@ -93,7 +93,11 @@ export default function WhatIsCiprina() {
           </div>
           <div className="track" ref={track} onScroll={onScroll} tabIndex={0} aria-label="Horizontal gallery of seven translations, use arrow buttons or swipe to explore">
             <div className="artColumn" data-column>
-              <img className="artwork" src="data:image/webp;base64,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" alt="Ilustración original de Ciprina de Odi Bazó, en rosa y azul claro" />
+              <svg className="artwork" viewBox="110 100 800 1340" role="img" aria-label="Ilustración Ciprina en rosa pastel y azul claro, vectorizada a partir del diseño aprobado de Odi Bazó" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#F1B0CD" d="M243 329 L221 339 L205 361 L186 419 L171 491 L163 563 L161 656 L174 798 L193 900 L220 1003 L260 1125 L296 1220 L350 1340 L372 1358 L400 1361 L417 1353 L425 1344 L433 1325 L433 1307 L362 1152 L328 1063 L290 933 L266 818 L252 702 L250 582 L258 501 L271 440 L289 385 L290 361 L283 345 L274 336 L258 329 Z"/>
+                <path fill="#F1B0CD" d="M666 148 L648 154 L635 166 L627 185 L627 201 L672 357 L723 581 L746 724 L760 870 L763 951 L760 1094 L748 1201 L723 1341 L728 1359 L738 1372 L754 1381 L774 1383 L795 1375 L814 1348 L833 1272 L847 1191 L859 1037 L859 951 L853 853 L837 721 L816 596 L784 448 L736 260 L708 168 L688 151 Z"/>
+                <path fill="#AFE4FB" fillRule="evenodd" d="M483 233 L454 244 L429 274 L408 321 L389 390 L370 493 L360 584 L358 665 L364 757 L380 871 L402 980 L436 1095 L470 1183 L506 1256 L529 1285 L557 1301 L596 1305 L618 1298 L630 1287 L639 1268 L638 1244 L632 1232 L621 1222 L576 1213 L531 1125 L501 1043 L483 978 L464 880 L454 803 L443 670 L444 563 L461 439 L487 338 L504 406 L532 551 L510 559 L498 570 L485 592 L476 618 L467 660 L462 709 L466 810 L482 902 L508 986 L520 1009 L536 1027 L566 1040 L592 1039 L611 1030 L625 1013 L637 979 L639 806 L629 650 L604 487 L559 288 L545 261 L529 244 L506 234 Z M546 658 L557 767 L558 886 L546 838 L538 767 L538 710 Z"/>
+              </svg>
               <span className="artFooter">CIPRINA / ODI BAZÓ</span>
             </div>
             {entries.map((entry, index) => (
@@ -153,7 +157,7 @@ export default function WhatIsCiprina() {
         .track::-webkit-scrollbar{display:none}
         .artColumn,.languageColumn{width:clamp(270px,27vw,355px);flex:0 0 clamp(270px,27vw,355px);min-height:555px;scroll-snap-align:start;position:relative}
         .artColumn{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px 22px 52px 0}
-        .artwork{width:min(100%,280px);height:385px;object-fit:contain}
+        .artwork{width:min(100%,280px);height:385px}
         .artNote{text-align:center;color:var(--soft);font-family:Georgia,serif;font-style:italic;font-size:14px;line-height:1.45;margin:0}
         .artFooter{position:absolute;bottom:26px;left:0;color:var(--soft);font-size:10px;letter-spacing:.16em}
         .languageColumn{padding:28px 28px 60px 2px;display:flex;flex-direction:column}
@@ -186,6 +190,28 @@ export default function WhatIsCiprina() {
           .artwork{height:370px}
           .bottom{padding:65px 20px 45px;align-items:flex-start;flex-direction:column}
           .scrollHint{text-align:left;line-height:1.5}
+        }
+
+        /* Desktop editorial fit: present the artwork and copy above the fold. */
+        @media(min-width:761px){
+          .sitebar{padding-top:18px;padding-bottom:18px}
+          .intro{padding-top:clamp(20px,3.1vh,38px);padding-bottom:clamp(20px,3.1vh,38px)}
+          .intro h1{font-size:clamp(45px,5.2vw,76px);line-height:.9;margin:18px 0 14px}
+          .intro>p{font-size:clamp(14px,1.25vw,17px);line-height:1.35}
+          .workTop{padding-top:7px;padding-bottom:7px}
+          .artColumn,.languageColumn{min-height:clamp(385px,51vh,510px)}
+          .artwork{height:clamp(260px,37vh,370px)}
+          .artColumn{padding-bottom:33px}
+          .columnNumber{margin-bottom:clamp(20px,3vh,38px)}
+          .flagRow{margin-bottom:14px}
+          .languageColumn{padding-top:18px;padding-bottom:25px}
+          .languageColumn h2{font-size:clamp(33px,2.65vw,45px);margin-bottom:20px}
+          .definition{margin-bottom:16px}
+          .definition p{font-size:clamp(12px,1.08vw,14px);line-height:1.42;margin-top:7px}
+          .poetic p{font-size:clamp(13px,1.14vw,15px)}
+          .artFooter{bottom:15px}
+          .scrollHint{padding-top:9px;padding-bottom:9px}
+          .bottom{padding-top:45px}
         }
         @media(prefers-reduced-motion:reduce){.controls button{transition:none}}
       `}</style>

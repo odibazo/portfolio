@@ -126,7 +126,7 @@ export default function WhatIsCiprina() {
             ))}
           </div>
           <div className="progress" role="progressbar" aria-label="Horizontal gallery position" aria-valuemin={0} aria-valuemax={100} aria-valuenow={position}>
-            <span style={{ transform: 'translateX(' + position + '%)' }} />
+            <span style={{ left: (position * 0.82) + '%' }} />
           </div>
           <div className="scrollHint">← DRAG, SWIPE OR USE THE ARROWS TO READ ALL SEVEN LANGUAGES →</div>
         </section>

@@ -145,3 +145,160 @@
 @media (prefers-reduced-motion: reduce) {
   .page * { scroll-behavior: auto; }
 }
+
+/* WLW V20: cinematic in-page experience, with a real interactive phone viewport. */
+.experienceButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 23px;
+  background: #cad6da;
+  color: #132128;
+  border: 1px solid #cad6da;
+  border-radius: 999px;
+  font: 800 12px/1.3 inherit;
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: .09em;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.experienceButton:hover { background: #eaf2f3; transform: translateY(-2px); }
+.experienceButton:focus-visible, .experienceClose:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.experienceOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(7,12,17,.94);
+  backdrop-filter: blur(16px);
+  overflow-y: auto;
+}
+.experienceDialog {
+  width: min(100%, 1100px);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #e7eff1;
+}
+.experienceTopbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.experienceEyebrow {
+  margin: 0 0 3px;
+  letter-spacing: .24em;
+  font: 700 10px/1.5 system-ui, sans-serif;
+  color: #b4c5cc;
+}
+.experienceTopbar h2 {
+  margin: 0;
+  font-size: clamp(25px,3vw,38px);
+  letter-spacing: -.04em;
+}
+.experienceClose {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #657b85;
+  border-radius: 50%;
+  background: #1b2a33;
+  color: white;
+  font-size: 19px;
+  cursor: pointer;
+}
+.phoneWrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  overflow: auto;
+}
+.phone {
+  position: relative;
+  width: min(390px, 94%);
+  height: min(77vh, 760px);
+  min-height: 420px;
+  padding: 9px;
+  border: 5px solid #6b7b84;
+  border-radius: 42px;
+  background: #101a20;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6), inset 0 0 0 2px #1e2e37;
+  overflow: hidden;
+}
+.phone iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 30px;
+  background: #0f1b23;
+  display: block;
+}
+.phoneSpeaker {
+  position: absolute;
+  z-index: 2;
+  top: 15px;
+  left: 50%;
+  width: 68px;
+  height: 9px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #060c10;
+  pointer-events: none;
+  opacity: .8;
+}
+.phoneHomeBar {
+  position: absolute;
+  z-index: 2;
+  bottom: 14px;
+  left: 50%;
+  width: 78px;
+  height: 4px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(228,238,242,.65);
+  pointer-events: none;
+}
+.experienceFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 5px;
+}
+.experienceFooter p { max-width: 480px; margin: 0; font-size: 12px; color: #bacbd1; }
+.experienceFooter a {
+  flex-shrink: 0;
+  text-decoration: none;
+  color: #e9f2f4;
+  border-bottom: 1px solid #849aa6;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: 8px 0;
+}
+@media(max-width:760px){
+  .experienceOverlay { padding: 8px 10px; }
+  .experienceDialog { gap: 9px; }
+  .experienceTopbar h2 { font-size: 24px; }
+  .phone { height: min(75dvh, 680px); min-height: 360px; width: min(390px, 95vw); border-width: 4px; border-radius: 32px; padding: 7px; }
+  .phone iframe { border-radius: 23px; }
+  .experienceFooter { flex-direction: column; gap: 2px; text-align: center; }
+  .experienceFooter p { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experienceButton { transition: none; }
+}

@@ -14,7 +14,7 @@ const projects = [
   { title: 'Astrogestalt', category: 'Web design', image: '/images/webastrogestalt.webp' },
   { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.webp', unoptimized: true },
   { title: '404 Playground', category: 'Interactive experiment · Creative coding', image: '/images/404-experiment.svg', href: '/play-404', unoptimized: true },
-  { title: 'WLW', category: 'Interactive webapp demo · UX/UI · In progress', image: '/images/wlw-preview-v11.png', href: 'https://wlw-bcn-v19-8-photo-fix.vercel.app', inProgress: true, mockup: true, alt: 'WLW interactive public demo with fictional profiles and plans' },
+  { title: 'WLW', category: 'Interactive webapp demo · UX/UI · In progress', image: '/images/wlw-preview-v11.png', href: 'https://wlw-bcn-demo-libre.vercel.app', inProgress: true, mockup: true, alt: 'WLW interactive public demo with fictional profiles and plans' },
 ];
 
 const videos = [

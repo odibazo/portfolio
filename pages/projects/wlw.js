@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,6 +7,17 @@ import home from '../../styles/Home.module.css';
 import wlw from '../../styles/WlwProject.module.css';
 
 export default function WlwProject() {
+  const [experienceOpen, setExperienceOpen] = useState(false);
+
+  useEffect(() => {
+    if (!experienceOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onEscape = (event) => { if (event.key === 'Escape') setExperienceOpen(false); };
+    window.addEventListener('keydown', onEscape);
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', onEscape); };
+  }, [experienceOpen]);
+
   return (
     <>
       <Head>
@@ -44,9 +56,9 @@ export default function WlwProject() {
               and discover local plans and events.
             </p>
             <div className={home.actions}>
-              <a className={home.secondaryButton} href="https://wlw-bcn-demo-libre.vercel.app" target="_blank" rel="noopener noreferrer">
-                Explore WLW · Open demo ↗
-              </a>
+              <button type="button" className={wlw.experienceButton} onClick={() => setExperienceOpen(true)}>
+                EXPERIENCE WLW <span aria-hidden="true">↗</span>
+              </button>
               <Link className={home.secondaryButton} href="/#work">
                 ← Back to selected work
               </Link>
@@ -56,7 +68,7 @@ export default function WlwProject() {
 
         <section className={wlw.caseStudy} aria-label="WLW concept preview">
           <div className={wlw.mockupStage}>
-            <a className={wlw.device} href="https://wlw-bcn-demo-libre.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open WLW V20 interactive webapp demo in a new tab">
+            <button type="button" className={wlw.device} onClick={() => setExperienceOpen(true)} aria-label="Experience WLW V20 inside the interactive mobile preview">
               <Image
                 src="/images/wlw-v20-portfolio-mockup.svg"
                 alt="WLW Barcelona V20 product mockup: discovery and local plans inside two titanium-style mobile app screens"
@@ -65,8 +77,8 @@ export default function WlwProject() {
                 unoptimized
                 priority
               />
-              <span className={wlw.openDemoCue} aria-hidden="true">EXPLORE WLW ↗</span>
-            </a>
+              <span className={wlw.openDemoCue} aria-hidden="true">EXPERIENCE ↗</span>
+            </button>
             <span className={wlw.ribbon}>IN PROGRESS</span>
           </div>
           <div className={wlw.caseCopy}>
@@ -86,6 +98,31 @@ export default function WlwProject() {
             </div>
           </div>
         </section>
+
+        {experienceOpen && (
+          <div className={wlw.experienceOverlay} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setExperienceOpen(false); }}>
+            <section className={wlw.experienceDialog} role="dialog" aria-modal="true" aria-labelledby="wlw-experience-title">
+              <div className={wlw.experienceTopbar}>
+                <div>
+                  <p className={wlw.experienceEyebrow}>WLW / BARCELONA / LIVE DEMO</p>
+                  <h2 id="wlw-experience-title">Experience WLW.</h2>
+                </div>
+                <button type="button" className={wlw.experienceClose} onClick={() => setExperienceOpen(false)} aria-label="Close WLW experience">✕</button>
+              </div>
+              <div className={wlw.phoneWrap}>
+                <div className={wlw.phone}>
+                  <div className={wlw.phoneSpeaker} aria-hidden="true" />
+                  <iframe title="WLW Barcelona interactive webapp, free demonstration" src="https://wlw-bcn-demo-libre.vercel.app/" loading="eager" allow="fullscreen" referrerPolicy="strict-origin-when-cross-origin" />
+                  <div className={wlw.phoneHomeBar} aria-hidden="true" />
+                </div>
+              </div>
+              <div className={wlw.experienceFooter}>
+                <p>Explore the app inside the phone. No login required. All profiles and plans are fictional.</p>
+                <a href="https://wlw-bcn-demo-libre.vercel.app/" target="_blank" rel="noopener noreferrer">OPEN FULL EXPERIENCE ↗</a>
+              </div>
+            </section>
+          </div>
+        )}
 
         <section className={wlw.bottomNav}>
           <Link href="/#work" className={home.textLink}>More selected work <span aria-hidden="true">↗</span></Link>

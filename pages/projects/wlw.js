@@ -44,7 +44,7 @@ export default function WlwProject() {
               and discover local plans and events.
             </p>
             <div className={home.actions}>
-              <a className={home.secondaryButton} href="https://wlw-bcn-v19-8-photo-fix.vercel.app" target="_blank" rel="noopener noreferrer">
+              <a className={home.secondaryButton} href="https://wlw-bcn-demo-libre.vercel.app" target="_blank" rel="noopener noreferrer">
                 Explore WLW · Open demo ↗
               </a>
               <Link className={home.secondaryButton} href="/#work">

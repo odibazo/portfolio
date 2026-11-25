@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import CursorTrail from '../components/CursorTrail';
 
 const projects = [
+  { title: 'WLW', category: 'Dating & community · UX/UI webapp · Live demo', image: '/images/wlw-v20-portfolio-mockup.svg', href: 'https://wlw-bcn-demo-libre.vercel.app', inProgress: true, unoptimized: true, alt: 'WLW Barcelona V20: dark titanium design mockup of discovery, plans and community events' },
   { title: 'Foxize Cloud', category: 'Web design & digital product', image: '/images/foxizecloud-current.jpg', href: 'https://www.foxizecloud.com/' },
   { title: 'Foxize', category: 'Corporate website & digital design', image: '/images/foxize-current.jpg', href: 'https://www.foxize.com/' },
   { title: 'PER Cards', category: 'Product & game design', image: '/images/PER-CARDS-2020ODIBAZO-9-1.webp', href: 'https://www.behance.net/gallery/107191195/La-baraja-de-cartas-para-PER' },
@@ -14,7 +15,6 @@ const projects = [
   { title: 'Astrogestalt', category: 'Web design', image: '/images/webastrogestalt.webp' },
   { title: 'Bouncing Shield', category: 'UX/UI & responsive web', image: '/images/bouncing-shield-mobile.webp', unoptimized: true },
   { title: '404 Playground', category: 'Interactive experiment · Creative coding', image: '/images/404-experiment.svg', href: '/play-404', unoptimized: true },
-  { title: 'WLW', category: 'Dating & community · UX/UI webapp · Live demo', image: '/images/wlw-v20-portfolio-mockup.svg', href: 'https://wlw-bcn-demo-libre.vercel.app', inProgress: true, unoptimized: true, alt: 'WLW Barcelona V20: dark titanium design mockup of discovery, plans and community events' },
 ];
 
 const videos = [

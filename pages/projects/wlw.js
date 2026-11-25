@@ -44,6 +44,9 @@ export default function WlwProject() {
               and discover local plans and events.
             </p>
             <div className={home.actions}>
+              <a className={home.secondaryButton} href="https://wlw-bcn-v19-8-photo-fix.vercel.app" target="_blank" rel="noopener noreferrer">
+                Explore WLW · Open demo ↗
+              </a>
               <Link className={home.secondaryButton} href="/#work">
                 ← Back to selected work
               </Link>
@@ -72,7 +75,7 @@ export default function WlwProject() {
               clear intentions and a community events experience.
             </p>
             <p>
-              An interactive prototype exists and is currently in private evaluation.
+              The interactive prototype is publicly available for feedback, with no account required.
               The screen shown here contains fictional demonstration profiles.
               WLW is not a launched service.
             </p>

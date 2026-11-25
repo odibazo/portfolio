@@ -40,15 +40,34 @@
 }
 .device {
   position: relative;
-  height: clamp(340px, 34vw, 500px);
-  aspect-ratio: 390 / 844;
-  border: 2px solid #353b42;
-  border-radius: 18px;
+  display: block;
+  width: min(94%, 800px);
+  aspect-ratio: 3 / 2;
+  border: 1px solid #60717c;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 22px 60px rgba(0,0,0,.6);
-  background: #101315;
+  box-shadow: 0 22px 60px rgba(0,0,0,.45);
+  background: #10191e;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 .device img { object-fit: cover; }
+.device:hover,
+.device:focus-visible { transform: translateY(-4px); box-shadow: 0 26px 70px rgba(0,0,0,.6); }
+.device:focus-visible { outline: 2px solid #d1e3e9; outline-offset: 4px; }
+.openDemoCue {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  color: #14242b;
+  background: #d0dce0;
+  padding: 9px 13px;
+  border-radius: 30px;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+}
 .ribbon {
   position: absolute;
   top: 0;
@@ -110,7 +129,7 @@
 @media (max-width: 900px) {
   .caseStudy { grid-template-columns: 1fr; }
   .mockupStage { min-height: 510px; }
-  .device { height: 440px; }
+  .device { width: 95%; }
 }
 @media (max-width: 760px) {
   .hero { padding: 84px 0 70px; }
@@ -118,7 +137,7 @@
   .title span { font-size: .56em; }
   .caseStudy { gap: 48px; }
   .mockupStage { min-height: 450px; }
-  .device { height: 395px; }
+  .device { width: 95%; }
   .caseCopy h2 { font-size: clamp(2.9rem, 12vw, 4.4rem); }
   .bottomNav { gap: 22px; }
   .bottomNav a { margin-top: 36px; }
